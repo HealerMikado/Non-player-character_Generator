@@ -1,6 +1,6 @@
 package fr.healermikado.pnj_generator.services;
 
-import fr.healermikado.businessObjects.Character;
+import fr.healermikado.pnj_generator.businessObjects.Character;
 
 /**
  * ICharacterService

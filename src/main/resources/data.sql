@@ -51,7 +51,6 @@ VALUES
   (19, 'Compétence spéciale (Jonglerie)'),
   (20, 'Compétence spéciale (Ruade)'),
   (21, 'Compétence spéciale (Saut)'),
-  (22, 'Compétence spéciale (Vol)'),
   (23, 'Connaissance encyclopédique (Art)'),
   (24, 'Connaissance encyclopédique (Biologie)'),
   (25, 'Connaissance encyclopédique (Chimie)'),
@@ -76,21 +75,65 @@ VALUES
   (41, 'Créativite artistique(Fête)'),
   (42, 'Gros yeux'),
   (43, 'Instinct de poney');
+INSERT INTO
+  link_race_talent (id_race, id_talent)
+VALUES
+  (2, 1),
+  (3, 2),
+  (1, 3),
+  (2, 4),
+  (1, 5),
+  (1, 6),
+  (1, 7),
+  (3, 8);
+INSERT INTO
+  tokens (id_token, token)
+VALUES
+  (1, 'Sunbeam'),
+  (2, 'Music'),
+  (3, 'Fizzy'),
+  (4, 'Happy'),
+  (5, 'Velvet'),
+  (6, 'Magic'),
+  (7, 'Feathers'),
+  (8, 'Banana'),
+  (9, 'Firefly'),
+  (10, 'Wings'),
+  (11, 'Cupid'),
+  (12, 'Celestial'),
+  (13, 'Almond'),
+  (14, 'Emerald'),
+  (15, 'Crescent'),
+  (16, 'Strudel'),
+  (17, 'Windy'),
+  (18, 'Splashes'),
+  (19, 'Spring'),
+  (20, 'Harvest'),
+  (21, 'Grape'),
+  (22, 'Lime'),
+  (23, 'Amethyst'),
+  (24, 'Leaf'),
+  (25, 'Cheery'),
+  (26, 'Posey'),
+  (27, 'Breezy'),
+  (28, 'Bunny'),
+  (29, 'Thunder'),
+  (30, 'Cloudy'),
+  (31, 'Afternoon'),
+  (32, 'Red'),
+  (33, 'Green'),
+  (34, 'Silver'),
+  (35, 'Gold'),
+  (36, 'Hoove'),
+  (37, 'Flash'),
+  (38, 'Burst'),
+  (39, 'Cape'),
+  (40, 'Flame');
 
--- CREATE TABLE link_race_talent (
---     id_race BIGINT,
---     id_talent BIGINT,
---     PRIMARY KEY (id_race, id_talent),
---     FOREIGN KEY (id_race) REFERENCES races(id_race),
---     FOREIGN KEY (id_talent) REFERENCES talents(id_talent)
---   );
-
-  INSERT INTO link_race_talent (id_race, id_talent) VALUES 
-  (2,1),
-  (3,2),
-  (1,3),
-  (2,4),
-  (1,5),
-  (1,6),
-  (1,7),
-  (3,8);
+  INSERT INTO level (lvl, lvl_value) VALUES
+  (1, 'D4'),
+  (2, 'D6'),
+  (3, 'D8'),
+  (4, 'D10'),
+  (5, 'D12'),
+  (6, 'D20');
