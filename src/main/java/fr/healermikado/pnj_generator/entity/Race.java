@@ -41,11 +41,16 @@ public class Race {
             @JoinColumn(name = "id_talent") })
     private Set<Talent> specificTalents;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "link_token_race", joinColumns = { @JoinColumn(name = "id_race") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_token") })
+    private List<Token> possibleToken;
+
     @Transient
     private Set<Talent> genericTalents;
 
 
-    public List<Talent> getAllTalents(){
+    public List<Talent> generateAllTalents(){
         List<Talent> allTalents = new ArrayList<>() ;
         allTalents.addAll(specificTalents);
         allTalents.addAll(genericTalents);

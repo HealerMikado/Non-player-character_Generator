@@ -30,7 +30,7 @@ public class LevelService {
     }
 
     public boolean isUpgradable(Integer levelToTest){
-        return (levelToTest < levels.size()+1);
+        return (levelToTest < levels.size()-1);
     }
     
 }

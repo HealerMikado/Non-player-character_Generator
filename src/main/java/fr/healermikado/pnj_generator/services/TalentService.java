@@ -12,12 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.ITalentDao;
+import fr.healermikado.pnj_generator.dtos.LevelDto;
 import fr.healermikado.pnj_generator.entity.Talent;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * TalentService
  */
 @Service
+@Getter
+@Setter
 public class TalentService {
     @Autowired
     private LevelService levelService;
@@ -29,40 +34,41 @@ public class TalentService {
         return iTalentDao.findAllGenericTalent();
     }
 
-    public  Map<String, String> generateTalentsMap(List<Talent> allTalents, int level) {
+    public Map<String, LevelDto> generateTalentsMap(List<Talent> allTalents, int level) {
         // generate the raw list of the talent
         List<String> listTalents = new ArrayList<>();
         for (int i = 0; i < level; i++) {
             listTalents.add(allTalents.get(ThreadLocalRandom.current().nextInt(allTalents.size())).getNom());
         }
 
-        Map<String, Integer> talentsIntLvl = new HashMap<>();
+        // The map with raw level
+        Map<String, Integer> talentsRawLvl = new HashMap<>();
         for (String nomTalent : listTalents) {
-            if (talentsIntLvl.containsKey(nomTalent)) {
+            if (talentsRawLvl.containsKey(nomTalent)) {
                 // some more code to check if the level of the current talent if not max.
                 // If not level up the talent, else choose another. Loop until a level up occur
                 Integer currentTalentLevel;
                 Boolean lvlUp = false;
                 do {
-                    currentTalentLevel = talentsIntLvl.get(nomTalent);
+                    currentTalentLevel = talentsRawLvl.get(nomTalent);
                     if (levelService.isUpgradable(currentTalentLevel)) {
                         lvlUp = true;
                     } else {
                         // Choose another talent
-                        String newTalent = allTalents.get(ThreadLocalRandom.current().nextInt(allTalents.size()))
+                        nomTalent = allTalents.get(ThreadLocalRandom.current().nextInt(allTalents.size()))
                                 .getNom();
                     }
 
                 } while (!lvlUp);
-                talentsIntLvl.put(nomTalent, currentTalentLevel + 1);
+                talentsRawLvl.put(nomTalent, currentTalentLevel + 1);
 
             } else {
-                talentsIntLvl.put(nomTalent, 0);
+                talentsRawLvl.put(nomTalent, 0);
             }
         }
-        Map<String, String> talentsOut = talentsIntLvl.entrySet().stream()
-                .collect(Collectors.toMap(e -> e.getKey(), e -> levelService.getLevels().get(e.getValue()).getDiceValue()));
-
+        Map<String, LevelDto> talentsOut = talentsRawLvl.entrySet().stream()
+                .collect(Collectors.toMap(e -> e.getKey(), //
+                        e -> new LevelDto(levelService.getLevels().get(e.getValue()))));
 
         return talentsOut;
 

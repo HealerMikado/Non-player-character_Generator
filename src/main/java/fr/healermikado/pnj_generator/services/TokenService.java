@@ -3,10 +3,8 @@ package fr.healermikado.pnj_generator.services;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.healermikado.pnj_generator.daos.ITokenDao;
 import fr.healermikado.pnj_generator.entity.Token;
 
 /**
@@ -16,13 +14,9 @@ import fr.healermikado.pnj_generator.entity.Token;
  */
 @Service
 public class TokenService {
-
-    @Autowired
-    private ITokenDao iTokenDao;
     
-    public String generateRandomName(){
+    public String generateRandomName(List<Token> tokens){
 
-        List<Token> tokens = iTokenDao.findAll();
 
         String firstName = getRandomToken(tokens);
 

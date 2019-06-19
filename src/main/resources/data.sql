@@ -129,11 +129,11 @@ VALUES
   (38, 'Burst'),
   (39, 'Cape'),
   (40, 'Flame'),
-  (41, 'Dragon')
-  (42, 'Griffon')
-  (43, 'Changelin')
-  (44, 'Yakyak')
-  (45, 'Chien de cristal');
+  (41, 'Dragon'),
+  (42, 'Griffon'),
+  (43, 'Changelin'),
+  (44, 'Yakyak'),
+  (45, 'Chien de cristal'),
   (46, 'Doe');
 INSERT INTO
   link_token_race (id_token, id_race)
@@ -262,12 +262,12 @@ VALUES
   (42,5),
   (43,6),
   (44,7),
-  (45,6),
+  (45,8),
   (46,4),
   (46,5),
   (46,6),
   (46,7),
-  (46,6);
+  (46,8);
 INSERT INTO
   level (lvl, lvl_value)
 VALUES
@@ -277,3 +277,11 @@ VALUES
   (4, 'D10'),
   (5, 'D12'),
   (6, 'D20');
+
+INSERT INTO already_made (id,name, id_race, lvl_body, lvl_mind, lvl_charm) VALUES
+ (1, 'Twilight Sparkle',1, 4,6,5),
+ (2, 'Applejack',2, 6,5,4),
+ (3, 'Fluttershy',3, 4,4,6),
+ (4, 'Pinkie Pie',2, 5,4,6),
+ (5, 'Rarity',1, 3,5,6),
+ (6, 'Rainbow Dash',3, 6,4,4);
