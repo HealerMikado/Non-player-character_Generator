@@ -258,16 +258,16 @@ VALUES
   (38, 3),
   (39, 3),
   (40, 3),
-  (41,4),
-  (42,5),
-  (43,6),
-  (44,7),
-  (45,8),
-  (46,4),
-  (46,5),
-  (46,6),
-  (46,7),
-  (46,8);
+  (41, 4),
+  (42, 5),
+  (43, 6),
+  (44, 7),
+  (45, 8),
+  (46, 4),
+  (46, 5),
+  (46, 6),
+  (46, 7),
+  (46, 8);
 INSERT INTO
   level (lvl, lvl_value)
 VALUES
@@ -277,11 +277,32 @@ VALUES
   (4, 'D10'),
   (5, 'D12'),
   (6, 'D20');
-
-INSERT INTO already_made (id,name, id_race, lvl_body, lvl_mind, lvl_charm) VALUES
- (1, 'Twilight Sparkle',1, 4,6,5),
- (2, 'Applejack',2, 6,5,4),
- (3, 'Fluttershy',3, 4,4,6),
- (4, 'Pinkie Pie',2, 5,4,6),
- (5, 'Rarity',1, 3,5,6),
- (6, 'Rainbow Dash',3, 6,4,4);
+INSERT INTO
+  already_made (id, name, id_race, lvl_body, lvl_mind, lvl_charm)
+VALUES
+  (1, 'Twilight Sparkle', 1, 4, 6, 5),
+  (2, 'Applejack', 2, 6, 5, 4),
+  (3, 'Fluttershy', 3, 4, 4, 6),
+  (4, 'Pinkie Pie', 2, 5, 4, 6),
+  (5, 'Rarity', 1, 3, 5, 6),
+  (6, 'Rainbow Dash', 3, 6, 4, 4);
+INSERT INTO
+  quirks (id_quirk, name_quirk)
+VALUES
+  (1, 'Allergie'),
+  (2, 'Asthme'),
+  (3, 'Autoritaire'),
+  (4, 'Distrait'),
+  (5, 'Etourdi'),
+  (6, 'Hirsute'),
+  (7, 'Loufoque'),
+  (8, 'Lunettes'),
+  (9, 'Maniaque'),
+  (10, 'Manque de tact'),
+  (11, 'Moimoimoimoimoi !'),
+  (12, 'Naïf'),
+  (13, 'Oooohh.. joli !'),
+  (14, 'Phobie'),
+  (15, 'Présomptueux'),
+  (16, 'Suceptible'),
+  (17, 'Ultra-timide');

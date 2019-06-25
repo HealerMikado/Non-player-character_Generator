@@ -1,5 +1,6 @@
 package fr.healermikado.pnj_generator.dtos;
 
+import java.util.List;
 import java.util.Map;
 
 import org.modelmapper.ModelMapper;
@@ -41,6 +42,9 @@ public class CharacterDto {
 
     // The charm level
     private LevelDto charmLevel;
+
+    //The default list
+    private List<String> quirks;
 
     public CharacterDto(String name, Race race, int level) {
         this.name = name;

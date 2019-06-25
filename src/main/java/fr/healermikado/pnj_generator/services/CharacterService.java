@@ -3,6 +3,7 @@ package fr.healermikado.pnj_generator.services;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class CharacterService implements ICharacterService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private QuirkService quirkService;
+
     @Override
     public CharacterDto generateCharacter() {
         List<Race> races = iRaceDao.findAll();
@@ -40,8 +44,13 @@ public class CharacterService implements ICharacterService {
 
         CharacterDto outputCharacter = new CharacterDto(tokenService.generateRandomName(race.getPossibleToken()), race,
                 characterLevel);
+        // the the talent
         outputCharacter.setTalents(talentService.generateTalentsMap(race.generateAllTalents(), characterLevel));
+        //set the quirks. TODO change that
+        outputCharacter.setQuirks(
+                quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toList()));
         setStatisticLevel(outputCharacter);
+
         return outputCharacter;
     }
 
@@ -63,33 +72,30 @@ public class CharacterService implements ICharacterService {
                 int random = ThreadLocalRandom.current().nextInt(3);
                 switch (random) {
                 case 0:
-                if (talentService.getLevelService().isUpgradable(bodyLevel)){
-                    bodyLevel++;
-                    updated=true;
-                }
+                    if (talentService.getLevelService().isUpgradable(bodyLevel)) {
+                        bodyLevel++;
+                        updated = true;
+                    }
                     break;
                 case 1:
-                if (talentService.getLevelService().isUpgradable(mindLevel)){
-                    mindLevel++;
-                    updated=true;
-                }
+                    if (talentService.getLevelService().isUpgradable(mindLevel)) {
+                        mindLevel++;
+                        updated = true;
+                    }
                     break;
                 case 2:
-                if (talentService.getLevelService().isUpgradable(charmLevel)){
-                    charmLevel++;
-                    updated=true;
-                }
+                    if (talentService.getLevelService().isUpgradable(charmLevel)) {
+                        charmLevel++;
+                        updated = true;
+                    }
                     break;
                 default:
                     break;
                 }
-                
+
             } while (!updated);
         }
 
-        System.out.println(bodyLevel);
-        System.out.println(mindLevel);
-        System.out.println(charmLevel);
         theCharacterToCreate.setBodyLevel(new LevelDto(talentService.getLevelService().getLevels().get(bodyLevel)));
         theCharacterToCreate.setMindLevel(new LevelDto(talentService.getLevelService().getLevels().get(mindLevel)));
         theCharacterToCreate.setCharmLevel(new LevelDto(talentService.getLevelService().getLevels().get(charmLevel)));
