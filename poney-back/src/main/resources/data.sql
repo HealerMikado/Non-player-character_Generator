@@ -278,10 +278,10 @@ VALUES
   (5, 'D12'),
   (6, 'D20');
 
-INSERT INTO already_made (id,name, id_race, lvl_body, lvl_mind, lvl_charm) VALUES
- (1, 'Twilight Sparkle',1, 4,6,5),
- (2, 'Applejack',2, 6,5,4),
- (3, 'Fluttershy',3, 4,4,6),
- (4, 'Pinkie Pie',2, 5,4,6),
- (5, 'Rarity',1, 3,5,6),
- (6, 'Rainbow Dash',3, 6,4,4);
+INSERT INTO already_made (id,name, id_race, lvl_body, lvl_mind, lvl_charm, src) VALUES
+ (1, 'Twilight Sparkle',1, 4,6,5, 'http://blog.univ-angers.fr/brony/files/2017/03/Twilight_Sparkle_Alicorn_vector.png'),
+ (2, 'Applejack',2, 6,5,4, 'https://vignette.wikia.nocookie.net/mlpfanart/images/9/97/Applejack_Standing.png/revision/latest?cb=20150418031724'),
+ (3, 'Fluttershy',3, 4,4,6, 'https://vignette.wikia.nocookie.net/p__/images/a/ac/My_first_attempt_at_vectoring_mlp_fim_fluttershy_by_sonarfoobthegreat-d5el31e.png/revision/latest?cb=20130520181345&path-prefix=protagonist'),
+ (4, 'Pinkie Pie',2, 5,4,6, 'http://images.adagio.com/images2/custom_blends/16858.jpg'),
+ (5, 'Rarity',1, 3,5,6,'https://ih0.redbubble.net/image.32644183.3772/flat,1000x1000,075,f.u6.jpg'),
+ (6, 'Rainbow Dash',3, 6,4,4, 'https://vignette.wikia.nocookie.net/mlpfanart/images/8/8e/Rainbow_Dash_by_Nethear.png/revision/latest?cb=20120530035934');

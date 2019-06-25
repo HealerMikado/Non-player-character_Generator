@@ -41,6 +41,9 @@ public class CharacterDto {
 
     // The charm level
     private LevelDto charmLevel;
+    
+    // The rouce image
+    private String src;
 
     public CharacterDto(String name, Race race, int level) {
         this.name = name;
@@ -53,13 +56,14 @@ public class CharacterDto {
         
         this.name = alreadyMadeEntity.getName();
         this.race = alreadyMadeEntity.getRace().getNom();
+        this.src = alreadyMadeEntity.getSrc();
 
         // Automatic map between entity et dto
         ModelMapper modelMapper = new ModelMapper();
         this.bodyLevel = modelMapper.map(alreadyMadeEntity.getBodyLevel(), LevelDto.class);
         this.mindLevel = modelMapper.map(alreadyMadeEntity.getMindLevel(), LevelDto.class);
         this.charmLevel = modelMapper.map(alreadyMadeEntity.getCharmLevel(), LevelDto.class);
-
+        
     }
 
 }

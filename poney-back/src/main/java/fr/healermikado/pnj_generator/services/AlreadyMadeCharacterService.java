@@ -1,6 +1,8 @@
 package fr.healermikado.pnj_generator.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +30,8 @@ public class AlreadyMadeCharacterService {
 
         return outputedCharacterDto;
     }
+
+	public List<CharacterDto> getAllCharacter() {
+		return iAlreadyMadeEntityDao.findAll().stream().map(p-> new CharacterDto(p)).collect(Collectors.toList());
+	}
 }

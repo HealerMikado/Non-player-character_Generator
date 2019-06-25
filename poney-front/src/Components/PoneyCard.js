@@ -11,17 +11,22 @@ import Typography from "@material-ui/core/Typography";
 
 class PoneyCard extends React.Component {
   render() {
-    const { checked, name, description, src, classes } = this.props;
+    const { checked, pony, classes } = this.props;
     return (
       <Card className={classes.card}>
         <CardActionArea>
-          <CardMedia className={classes.media} image={src} title={name} />
+          <CardMedia className={classes.media} image={pony.src} title={pony.name} />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {name}
+              {pony.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {description}
+              {pony.race}
+            </Typography>
+            <Typography >
+              <img src = "https://img.icons8.com/dusk/30/000000/flex-biceps.png"/> : {pony.bodyLevel.diceValue} <br/>
+              <img src = "https://img.icons8.com/bubbles/30/000000/brain.png"/>  : {pony.mindLevel.diceValue} <br/>
+              <img src = "https://img.icons8.com/cotton/30/000000/glossy-lips.png"/>  :  {pony.charmLevel.diceValue}
             </Typography>
           </CardContent>
         </CardActionArea>

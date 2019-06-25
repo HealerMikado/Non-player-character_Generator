@@ -32,6 +32,9 @@ public class CharacterEntity {
     @Column
     private String name;
 
+    @Column
+    private String src;
+    
     @ManyToOne()
     @JoinColumn(name="id_race", referencedColumnName = "id_race") 
     private Race race;
