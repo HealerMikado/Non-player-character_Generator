@@ -12,30 +12,33 @@ import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 import PoneyGrid from "./PoneyGrid";
 import theme from "../../Theme";
+
 class Core extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkedA: false
+      isToggleOn: false
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleSwitch() {
-    this.setState({ checkedA: !this.state.checkedA });
+  handleClick() {
+    this.setState({ isToggleOn: this.state.isToggleOn === false });
+    console.log(this.state.isToggleOn);
   }
+
   render() {
     const { classes } = this.props;
+    const { ToggleOn } = this.state;
     return (
       <Container>
         <Tooltip title="Activer la suppression">
           <Switch
             className={classes.Switch}
-            checked={this.state.checkedA}
-            onChange={this.handleChange}
-            value="checkedA"
-            label="Supprimer"
-            inputProps={{ "aria-label": "secondary checkbox" }}
-            labelPlacement="bottom"
+            checked={ToggleOn}
+            onChange={this.handleClick}
+            value="checked"
+            inputProps={{ "aria-label": "suppression" }}
           />
         </Tooltip>
         <Paper className={classes.paper}>
