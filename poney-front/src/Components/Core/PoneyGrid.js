@@ -22,7 +22,6 @@ class PoneyGrid extends Component {
    * Get all the ponies !
    */
   getAllPonies = () => {
-    console.log("getAllPonies")
     let thisG = this;
 
         fetch('http://localhost:8080/characters')

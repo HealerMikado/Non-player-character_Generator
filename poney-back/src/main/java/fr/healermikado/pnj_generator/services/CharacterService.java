@@ -48,7 +48,7 @@ public class CharacterService implements ICharacterService {
         outputCharacter.setTalents(talentService.generateTalentsMap(race.generateAllTalents(), characterLevel));
         //set the quirks. TODO change that
         outputCharacter.setQuirks(
-                quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toList()));
+                quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toSet()));
         setStatisticLevel(outputCharacter);
 
         return outputCharacter;

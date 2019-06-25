@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
+import ListTalents from "../ListQuirks";
 
 class PoneyCard extends React.Component {
   render() {
@@ -24,9 +25,14 @@ class PoneyCard extends React.Component {
               {pony.race}
             </Typography>
             <Typography >
-              <img src = "https://img.icons8.com/dusk/30/000000/flex-biceps.png"/> : {pony.bodyLevel.diceValue} <br/>
-              <img src = "https://img.icons8.com/bubbles/30/000000/brain.png"/>  : {pony.mindLevel.diceValue} <br/>
-              <img src = "https://img.icons8.com/cotton/30/000000/glossy-lips.png"/>  :  {pony.charmLevel.diceValue}
+              <img src="https://img.icons8.com/dusk/30/000000/flex-biceps.png" /> : {pony.bodyLevel.diceValue} <br />
+              <img src="https://img.icons8.com/bubbles/30/000000/brain.png" />  : {pony.mindLevel.diceValue} <br />
+              <img src="https://img.icons8.com/cotton/30/000000/glossy-lips.png" />  :  {pony.charmLevel.diceValue} <br />
+              <img src="https://img.icons8.com/cotton/64/000000/star-of-bethlehem--v1.png" />
+            </Typography>
+            <Typography>
+
+              <ListTalents className={classes.ListTalents} quirks={pony.quirks} />
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -54,7 +60,7 @@ const styles = {
     display: "inline-block"
   },
   media: {
-    height: 140
+    height: 300
   },
   fab: {
     float: "right"

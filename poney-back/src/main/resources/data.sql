@@ -306,3 +306,18 @@ VALUES
   (15, 'Présomptueux'),
   (16, 'Suceptible'),
   (17, 'Ultra-timide');
+
+INSERT INTO
+  quirks_link_already_made (id_pony, id_quirk)
+  VALUES
+  (1,3),
+  (2,10),
+  (2,6),
+  (3,17),
+  (3,14),
+  (4,12),
+  (4,7),
+  (5,9),
+  (5,14),
+  (6,11),
+  (6,15);

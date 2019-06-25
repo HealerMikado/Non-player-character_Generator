@@ -2,6 +2,8 @@ package fr.healermikado.pnj_generator.dtos;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 
@@ -25,7 +27,7 @@ public class CharacterDto {
     // The name of the pony
     private String name;
 
-    // The string representation of the race of the pony
+    // The string representation of the race of the pony 
     private String race;
 
     // The level of the pony
@@ -47,7 +49,7 @@ public class CharacterDto {
     private String src;
 
     //The default list
-    private List<String> quirks;
+    private Set<String> quirks;
 
     public CharacterDto(String name, Race race, int level) {
         this.name = name;
@@ -61,6 +63,7 @@ public class CharacterDto {
         this.name = alreadyMadeEntity.getName();
         this.race = alreadyMadeEntity.getRace().getNom();
         this.src = alreadyMadeEntity.getSrc();
+        this.quirks = alreadyMadeEntity.getQuirks().stream().map(q-> q.getValue()).collect(Collectors.toSet());
 
         // Automatic map between entity et dto
         ModelMapper modelMapper = new ModelMapper();
