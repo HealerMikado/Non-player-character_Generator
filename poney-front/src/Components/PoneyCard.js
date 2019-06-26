@@ -5,10 +5,16 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
-import ListTalents from "../ListQuirks";
+import Divider from '@material-ui/core/Divider';
+import ListTalents from "./ListQuirks";
 
 class PoneyCard extends React.Component {
   render() {
@@ -25,11 +31,35 @@ class PoneyCard extends React.Component {
               {pony.race}
             </Typography>
             <Typography >
-              <img src="https://img.icons8.com/dusk/30/000000/flex-biceps.png" /> : {pony.bodyLevel.diceValue} <br />
-              <img src="https://img.icons8.com/bubbles/30/000000/brain.png" />  : {pony.mindLevel.diceValue} <br />
-              <img src="https://img.icons8.com/cotton/30/000000/glossy-lips.png" />  :  {pony.charmLevel.diceValue} <br />
-              <img src="https://img.icons8.com/cotton/64/000000/star-of-bethlehem--v1.png" />
+
+              <List >
+                <ListItem >
+                  <ListItemAvatar>
+                    <Avatar>
+                      <img src="https://img.icons8.com/dusk/40/000000/flex-biceps.png" alt = "body value" />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={pony.bodyLevel.diceValue} />
+                </ListItem>
+                <ListItem >
+                  <ListItemAvatar>
+                    <Avatar>
+                      <img src="https://img.icons8.com/dusk/40/000000/brain.png" alt="brain value"/>
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={pony.mindLevel.diceValue} />
+                </ListItem>
+                <ListItem >
+                  <ListItemAvatar>
+                    <Avatar>
+                      <img src="https://img.icons8.com/cotton/40/000000/lips.png" alt="Charm value"/>
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={pony.charmLevel.diceValue} />
+                </ListItem>
+              </List>
             </Typography>
+            <Divider />
             <Typography>
 
               <ListTalents className={classes.ListTalents} quirks={pony.quirks} />
@@ -58,6 +88,9 @@ const styles = {
     marginBottom: 10,
     marginLeft: 10,
     display: "inline-block"
+  },
+  dividerFullWidth: {
+    margin: `5px 0 0 2px`,
   },
   media: {
     height: 300
