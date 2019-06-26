@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import PoneyCard from "../PoneyCard";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 class PoneyGrid extends Component {
-
-  constructor(){
+  constructor() {
     super();
-    this.state = {ponies : []};
+    this.state = { ponies: [] };
   }
-
 
   /**
    * Quand on va créer le composant on va chercher tous les poney
    */
-  componentWillMount() {
+  componentDidMount() {
     this.getAllPonies();
   }
 
@@ -24,29 +23,24 @@ class PoneyGrid extends Component {
   getAllPonies = () => {
     let thisG = this;
 
-        fetch('http://localhost:8080/characters')
-            .then(response => response.json())
-            .then(function (result) {
-                console.log(result);
-                thisG.setState({ ponies: result });
-                console.log(thisG.state.pony);
-            });
-
-  }
+    fetch("http://localhost:8080/characters")
+      .then(response => response.json())
+      .then(function(result) {
+        console.log(result);
+        thisG.setState({ ponies: result });
+        console.log(thisG.state.pony);
+      });
+  };
 
   render() {
-    const { classes } = this.props;
+    const { classes, ponies } = this.props;
     return (
       <React.Fragment>
         <Grid Container spacing={6}>
           <Grid item xs={12} className={classes.gridItem}>
-
-          {this.state.ponies.map((pony, i) =>  <PoneyCard
-              className={classes.PoneyCard}
-              pony = {pony}
-            />)}
-
-           
+            {ponies.map((pony, i) => (
+              <PoneyCard className={classes.PoneyCard} pony={pony} />
+            ))}
           </Grid>
         </Grid>
       </React.Fragment>
@@ -69,5 +63,15 @@ const styles = {
     padding: 20
   }
 };
+const mapStateToProps = ({ poneyReducer }) => {
+  return {
+    ponies: poneyReducer.ponies
+  };
+};
 
-export default withStyles(styles)(PoneyGrid);
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    null
+  )(PoneyGrid)
+);
