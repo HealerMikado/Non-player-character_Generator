@@ -5,9 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 
 class ListQuirks extends React.Component {
@@ -25,7 +22,7 @@ class ListQuirks extends React.Component {
           <ListItem >
             <ListItemAvatar>
               <Avatar>
-              <img src="https://img.icons8.com/color/45/000000/drama.png"/>
+              <img src="https://img.icons8.com/color/40/000000/drama.png"/>
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={quirk  }/>
