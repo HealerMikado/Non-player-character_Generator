@@ -4,7 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/";
 import Fab from "@material-ui/core/Fab";
 import Add from "@material-ui/icons/Add";
-import FilterVintageRounded from "@material-ui/icons/FilterVintageRounded";
 import Search from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Switch from "@material-ui/core/Switch";
@@ -14,6 +13,7 @@ import theme from "../../Theme";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchPonies, setPonies } from "../../redux/Poney/poneyAction";
+import FormDialog from "../Form/FormDialog";
 class Core extends React.Component {
   constructor(props) {
     super(props);
@@ -25,15 +25,17 @@ class Core extends React.Component {
 
   handleClick() {
     this.setState({ isToggleOn: this.state.isToggleOn === false });
-    console.log(this.state.isToggleOn);
   }
+
   componentDidMount() {
     const { fetchPonies } = this.props;
     fetchPonies();
   }
   componentWillUnmount() {
+    const { setPonies } = this.props;
     setPonies();
   }
+
   render() {
     const { classes } = this.props;
     const { ToggleOn } = this.state;
@@ -50,19 +52,13 @@ class Core extends React.Component {
         </Tooltip>
         <Paper className={classes.paper}>
           <h1 className={classes.h1}>Ecurie</h1>
-          <Fab variant="extended" aria-label="Add" className={classes.fab}>
-            <Add className={classes.extendedIcon} />
-            &nbsp; Ajouter un nouveau poney
-          </Fab>
-          <Tooltip title="Ajouter un nouveau poney random">
-            <Fab
-              variant="round"
-              aria-label="AddRandom"
-              className={classes.fab3}
-            >
-              <FilterVintageRounded className={classes.extendedIcon} />
+          <FormDialog handleClick={this.handleSubmit()}>
+            <Fab variant="extended" aria-label="Add" className={classes.fab}>
+              <Add className={classes.extendedIcon} />
+              &nbsp; Ajouter un nouveau poney
             </Fab>
-          </Tooltip>
+          </FormDialog>
+
           <Fab variant="extended" className={classes.fab2} disableRipple={true}>
             <Search className={classes.extendedIcon} />
             <InputBase
@@ -74,7 +70,7 @@ class Core extends React.Component {
               inputProps={{ "aria-label": "Search" }}
             />
           </Fab>
-          <PoneyGrid checked={true} />
+          <PoneyGrid checked={ToggleOn} />
         </Paper>
       </Container>
     );
@@ -82,6 +78,9 @@ class Core extends React.Component {
 }
 
 const styles = {
+  form: {
+    position: "absolute"
+  },
   h1: {
     color: "black",
     fontFamily: "Cormorant Garamond",
@@ -146,9 +145,15 @@ const styles = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ fetchPonies, setPonies }, dispatch);
 
+const mapStateToProps = ({ poneyReducer }) => {
+  return {
+    ponies: poneyReducer.ponies
+  };
+};
+
 export default withStyles(styles)(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Core)
 );

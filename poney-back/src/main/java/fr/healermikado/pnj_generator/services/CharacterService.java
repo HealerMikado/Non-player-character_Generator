@@ -8,9 +8,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.healermikado.pnj_generator.daos.ICharacterDao;
 import fr.healermikado.pnj_generator.daos.IRaceDao;
 import fr.healermikado.pnj_generator.dtos.CharacterDto;
+import fr.healermikado.pnj_generator.dtos.HalfWayCharacter;
 import fr.healermikado.pnj_generator.dtos.LevelDto;
+import fr.healermikado.pnj_generator.entity.CharacterEntity;
 import fr.healermikado.pnj_generator.entity.Race;
 
 /**
@@ -18,7 +21,8 @@ import fr.healermikado.pnj_generator.entity.Race;
  */
 @Service
 public class CharacterService implements ICharacterService {
-
+	@Autowired
+	private ICharacterDao iCharacterDao;
     @Autowired
     private IRaceDao iRaceDao;
 
@@ -53,7 +57,30 @@ public class CharacterService implements ICharacterService {
 
         return outputCharacter;
     }
-
+    
+//    @Override
+//    public CharacterEntity generateCharacter(HalfWayCharacter hc) {
+//        hc.getRace().setGenericTalents(talentService.findAllGenericTalent());
+//
+//        int characterLevel =hc.getLevel();
+//
+//        Race race = hc.getRace();
+//
+//         outputCharacter = new CharacterDto(hc.getName(), race,
+//                characterLevel);
+//        // the the talent
+//        outputCharacter.setTalents(talentService.generateTalentsMap(race.generateAllTalents(), characterLevel));
+//        //set the quirks. TODO change that
+//        outputCharacter.setQuirks(
+//                quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toSet()));
+//        setStatisticLevel(outputCharacter);
+//        
+//        iCharacterDao.save(outputCharacter);
+//        return outputCharacter;
+//    }
+    
+    
+    
     public void setStatisticLevel(CharacterDto theCharacterToCreate) {
         int bodyLevel = 0;
         int mindLevel = 0;

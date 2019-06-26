@@ -72,5 +72,5 @@ public class CharacterDto {
         this.charmLevel = modelMapper.map(alreadyMadeEntity.getCharmLevel(), LevelDto.class);
         
     }
-
+    
 }
