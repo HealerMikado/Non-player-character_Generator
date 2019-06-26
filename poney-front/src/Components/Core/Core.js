@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/";
@@ -12,7 +11,9 @@ import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 import PoneyGrid from "./PoneyGrid";
 import theme from "../../Theme";
-
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchPonies, setPonies } from "../../redux/Poney/poneyAction";
 class Core extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,13 @@ class Core extends React.Component {
     this.setState({ isToggleOn: this.state.isToggleOn === false });
     console.log(this.state.isToggleOn);
   }
-
+  componentDidMount() {
+    const { fetchPonies } = this.props;
+    fetchPonies();
+  }
+  componentWillUnmount() {
+    setPonies();
+  }
   render() {
     const { classes } = this.props;
     const { ToggleOn } = this.state;
@@ -136,6 +143,14 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(Core);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchPonies, setPonies }, dispatch);
+
+export default withStyles(styles)(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Core)
+);
 
 //https://www.pixelstalk.net/wp-content/uploads/2016/04/MLP-wallpapers-HD-cartoon-fantasy-horses-horse-unicorn.png
