@@ -53,15 +53,23 @@ public class CharacterDto {
 
     public CharacterDto(String name, Race race, int level) {
         this.name = name;
-        this.race = race.getNom();
+        this.race = race.getName();
         this.level = level;
     }
+
+    public CharacterDto(String name, String race, int level, String src) {
+        this.name = name;
+        this.race = race;
+        this.level = level;
+        this.src = src;
+    }
+
 
     public CharacterDto(CharacterEntity alreadyMadeEntity) {
 
         
         this.name = alreadyMadeEntity.getName();
-        this.race = alreadyMadeEntity.getRace().getNom();
+        this.race = alreadyMadeEntity.getRace().getName();
         this.src = alreadyMadeEntity.getSrc();
         this.quirks = alreadyMadeEntity.getQuirks().stream().map(q-> q.getValue()).collect(Collectors.toSet());
 

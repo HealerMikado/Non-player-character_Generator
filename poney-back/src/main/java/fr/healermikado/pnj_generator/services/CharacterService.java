@@ -1,6 +1,7 @@
 package fr.healermikado.pnj_generator.services;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -11,9 +12,9 @@ import org.springframework.stereotype.Service;
 import fr.healermikado.pnj_generator.daos.ICharacterDao;
 import fr.healermikado.pnj_generator.daos.IRaceDao;
 import fr.healermikado.pnj_generator.dtos.CharacterDto;
-import fr.healermikado.pnj_generator.dtos.HalfWayCharacter;
 import fr.healermikado.pnj_generator.dtos.LevelDto;
 import fr.healermikado.pnj_generator.entity.CharacterEntity;
+import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.entity.Race;
 
 /**
@@ -21,8 +22,8 @@ import fr.healermikado.pnj_generator.entity.Race;
  */
 @Service
 public class CharacterService implements ICharacterService {
-	@Autowired
-	private ICharacterDao iCharacterDao;
+    @Autowired
+    private ICharacterDao iCharacterDao;
     @Autowired
     private IRaceDao iRaceDao;
 
@@ -50,37 +51,37 @@ public class CharacterService implements ICharacterService {
                 characterLevel);
         // the the talent
         outputCharacter.setTalents(talentService.generateTalentsMap(race.generateAllTalents(), characterLevel));
-        //set the quirks. TODO change that
+        // set the quirks. TODO change that
         outputCharacter.setQuirks(
                 quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toSet()));
         setStatisticLevel(outputCharacter);
 
         return outputCharacter;
     }
-    
-//    @Override
-//    public CharacterEntity generateCharacter(HalfWayCharacter hc) {
-//        hc.getRace().setGenericTalents(talentService.findAllGenericTalent());
-//
-//        int characterLevel =hc.getLevel();
-//
-//        Race race = hc.getRace();
-//
-//         outputCharacter = new CharacterDto(hc.getName(), race,
-//                characterLevel);
-//        // the the talent
-//        outputCharacter.setTalents(talentService.generateTalentsMap(race.generateAllTalents(), characterLevel));
-//        //set the quirks. TODO change that
-//        outputCharacter.setQuirks(
-//                quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toSet()));
-//        setStatisticLevel(outputCharacter);
-//        
-//        iCharacterDao.save(outputCharacter);
-//        return outputCharacter;
-//    }
-    
-    
-    
+
+    /**
+     * Create a CharacterEntity from a CharacterDto. Call the database to get all
+     * the usefull info
+     * 
+     * @param hc
+     * @return
+     */
+    @Override
+    public CharacterEntity generateCharacterFromDto(CharacterDto characterDto) {
+        CharacterEntity theCharacterToReturn = new CharacterEntity();
+        theCharacterToReturn.setName(characterDto.getName());
+        theCharacterToReturn.setRace(iRaceDao.findByName(characterDto.getRace()).get());
+        theCharacterToReturn.setSrc(characterDto.getSrc());
+        theCharacterToReturn.setBodyLevel(new Level(1L, "D4"));
+        theCharacterToReturn.setMindLevel(new Level(1L, "D4"));
+        theCharacterToReturn.setCharmLevel(new Level(1L, "D4"));
+        theCharacterToReturn.setQuirks(new HashSet<>());
+
+        iCharacterDao.save(theCharacterToReturn);
+
+        return theCharacterToReturn;
+    }
+
     public void setStatisticLevel(CharacterDto theCharacterToCreate) {
         int bodyLevel = 0;
         int mindLevel = 0;

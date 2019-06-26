@@ -36,6 +36,10 @@ class Core extends React.Component {
     setPonies();
   }
 
+  handleSubmit(){
+    
+  }
+
   render() {
     const { classes } = this.props;
     const { ToggleOn } = this.state;
@@ -52,7 +56,7 @@ class Core extends React.Component {
         </Tooltip>
         <Paper className={classes.paper}>
           <h1 className={classes.h1}>Ecurie</h1>
-          <FormDialog handleClick={this.handleSubmit()}>
+          <FormDialog handleClick={this.handleSubmit()} >
             <Fab variant="extended" aria-label="Add" className={classes.fab}>
               <Add className={classes.extendedIcon} />
               &nbsp; Ajouter un nouveau poney

@@ -1,5 +1,5 @@
 INSERT INTO
-  races (id_race, nom)
+  races (id_race, name)
 VALUES
   (1, 'Licorne'),
   (2, 'Poney terrestre'),

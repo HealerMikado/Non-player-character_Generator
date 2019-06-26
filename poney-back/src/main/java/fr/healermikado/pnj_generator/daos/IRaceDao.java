@@ -17,4 +17,6 @@ public interface IRaceDao extends CrudRepository<Race, Long>{
     public List<Race> findAll();
 
     public Optional<Race> findById(Long id);
+
+    public Optional<Race> findByName(String name);
 }
