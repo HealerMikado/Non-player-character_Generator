@@ -22,7 +22,7 @@ public class RaceController {
     @Autowired
     public RaceService raceService;
 
-    @GetMapping(value = "races/")
+    @GetMapping(value = "races")
     @ResponseBody
     public List<Race> getAllRace() {
         return raceService.getAllRaces();
