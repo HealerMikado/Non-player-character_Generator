@@ -39,7 +39,7 @@ public class CharacterService implements ICharacterService {
 
 	@Autowired
 	private QuirkService quirkService;
-	
+
 	private static final String DEFAULT_SRC = "https://static1.fjcdn.com/comments/Ghostrollerelite+rolled+a+random+image+posted+in+comment+2724081+at+_b8d37e5c953413851a5e42d88b304a37.png";
 
 	@Override
@@ -67,7 +67,7 @@ public class CharacterService implements ICharacterService {
 
 	/**
 	 * Create a CharacterEntity from a CharacterDto. Call the database to get all
-	 * the usefull info
+	 * the usefull info. Check the info
 	 * 
 	 * @param hc
 	 * @return
@@ -76,8 +76,8 @@ public class CharacterService implements ICharacterService {
 	public CharacterEntity generateCharacterFromDto(CharacterDto characterDto) {
 		logger.info("Create empty character");
 		CharacterEntity theCharacterToReturn = new CharacterEntity();
-		///For know the race have to exist in the DB :(
-		//TODO change that
+		/// For know the race have to exist in the DB :(
+		// TODO change that
 		theCharacterToReturn.setRace(iRaceDao.findByName(characterDto.getRace()).get());
 		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()) );
 		//Generate name if name is empty
@@ -85,6 +85,8 @@ public class CharacterService implements ICharacterService {
 				? tokenService.generateRandomName(theCharacterToReturn.getRace().getPossibleToken())
 				: characterDto.getName());
 		logger.debug(String.format("Name of the generate character %s", theCharacterToReturn.getName()) );
+		
+		theCharacterToReturn.setLevel(characterDto.getLevel()>0?characterDto.getLevel():1);
 
 		// If no src default image
 		theCharacterToReturn.setSrc(StringUtils.isEmpty(characterDto.getSrc())?DEFAULT_SRC:characterDto.getSrc());

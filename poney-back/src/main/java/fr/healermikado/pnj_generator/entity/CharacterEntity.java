@@ -41,8 +41,9 @@ public class CharacterEntity {
     @Column
     private String name;
     
-    @Column(name="level")
-    private int characterLevel;
+
+    @Column
+    private int level;
 
     @Column(columnDefinition = "VARCHAR(500)")
     private String src;
