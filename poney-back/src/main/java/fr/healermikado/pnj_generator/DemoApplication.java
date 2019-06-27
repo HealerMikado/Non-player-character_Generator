@@ -33,11 +33,15 @@ public class DemoApplication {
 	public void test() {
 		CharacterDto characterDto = new CharacterDto("Derpy", "Pégase", 3,
 				"https://i.kym-cdn.com/entries/icons/original/000/005/316/derpypony.jpg");
+		
+		CharacterDto characterDto2 = new CharacterDto("Prince Rutherford", "Yakyak", 3,
+				null);
 
 		CharacterEntity character = characterService.generateCharacterFromDto(characterDto);
 
 		logger.info("Save a new pony");
 		iCharacterDao.save(character);
+		iCharacterDao.save(characterService.generateCharacterFromDto(characterDto2));
 	}
 
 }

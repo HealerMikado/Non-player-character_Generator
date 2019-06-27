@@ -79,18 +79,20 @@ public class CharacterService implements ICharacterService {
 		/// For know the race have to exist in the DB :(
 		// TODO change that
 		theCharacterToReturn.setRace(iRaceDao.findByName(characterDto.getRace()).get());
-		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()) );
-		//Generate name if name is empty
+		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()));
+		// Generate name if name is empty
 		theCharacterToReturn.setName(StringUtils.isEmpty(characterDto.getName())
 				? tokenService.generateRandomName(theCharacterToReturn.getRace().getPossibleToken())
 				: characterDto.getName());
-		logger.debug(String.format("Name of the generate character %s", theCharacterToReturn.getName()) );
-		
-		theCharacterToReturn.setLevel(characterDto.getLevel()>0?characterDto.getLevel():1);
+		logger.debug(String.format("Name of the generate character %s", theCharacterToReturn.getName()));
 
-		// If no src default image
-		theCharacterToReturn.setSrc(StringUtils.isEmpty(characterDto.getSrc())?DEFAULT_SRC:characterDto.getSrc());
-		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()) );
+		theCharacterToReturn.setLevel(characterDto.getLevel() > 0 ? characterDto.getLevel() : 1);
+
+		// If no src get an image from the dbF
+		theCharacterToReturn.setSrc(
+				StringUtils.isEmpty(characterDto.getSrc()) ? theCharacterToReturn.getRace().getImages().get(0).getSrc()
+						: characterDto.getSrc());
+		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()));
 
 		theCharacterToReturn.setBodyLevel(new Level(1L, "D4"));
 		theCharacterToReturn.setMindLevel(new Level(1L, "D4"));
@@ -103,7 +105,7 @@ public class CharacterService implements ICharacterService {
 	}
 
 	public void setStatisticLevel(CharacterDto theCharacterToCreate) {
-		int bodyLevel = theCharacterToCreate.getRace()=="Poney terrestre" ? 1:0;
+		int bodyLevel = theCharacterToCreate.getRace() == "Poney terrestre" ? 1 : 0;
 		int mindLevel = 0;
 		int charmLevel = 1;
 

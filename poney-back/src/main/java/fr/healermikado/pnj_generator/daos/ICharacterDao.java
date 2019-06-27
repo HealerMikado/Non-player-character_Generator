@@ -16,6 +16,8 @@ public interface ICharacterDao extends CrudRepository<CharacterEntity, Long> {
 
     public Optional<CharacterEntity> findById(Long id);
     
+    public Optional<CharacterEntity> findByName(String name);
+    
     public List<CharacterEntity> findAll();
     
 }
