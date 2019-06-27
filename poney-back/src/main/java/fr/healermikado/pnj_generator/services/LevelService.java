@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.ILevelDao;
+import fr.healermikado.pnj_generator.dtos.LevelDto;
 import fr.healermikado.pnj_generator.entity.Level;
 import lombok.Getter;
 
@@ -23,14 +24,20 @@ public class LevelService {
 
     private List<Level> levels;
 
-    
     @PostConstruct
-    public void initialize(){
+    public void initialize() {
         this.levels = this.iLevelDao.findAllByOrderByLvlAsc();
     }
 
-    public boolean isUpgradable(Integer levelToTest){
-        return (levelToTest < levels.size()-1);
+    public boolean isUpgradable(Integer levelToTest) {
+        return (levelToTest < levels.size() - 1);
     }
-    
+
+    public Level levelDtoToEntity(LevelDto levelDto) {
+        return this.levels.stream()//
+                .filter(level -> levelDto.getDiceValue().equals(level.getDiceValue()))//
+                .findAny()//
+                .orElse(null);
+    }
+
 }

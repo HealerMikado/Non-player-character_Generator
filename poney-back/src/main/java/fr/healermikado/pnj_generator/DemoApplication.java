@@ -1,5 +1,8 @@
 package fr.healermikado.pnj_generator;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import fr.healermikado.pnj_generator.daos.ICharacterDao;
 import fr.healermikado.pnj_generator.dtos.CharacterDto;
 import fr.healermikado.pnj_generator.entity.CharacterEntity;
+import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.services.CharacterService;
 
 @SpringBootApplication
@@ -31,11 +35,25 @@ public class DemoApplication {
 	 */
 	@PostConstruct
 	public void test() {
-		CharacterDto characterDto = new CharacterDto("Derpy", "Pégase", 3,
-				"https://i.kym-cdn.com/entries/icons/original/000/005/316/derpypony.jpg");
-		
-		CharacterDto characterDto2 = new CharacterDto("Prince Rutherford", "Yakyak", 3,
-				null);
+		CharacterDto characterDto = new CharacterDto("Derpy"//
+				, "Pégase"//
+				, 3//
+				, new HashMap<>()//
+				, new Level(2L, "D6")//
+				, new Level(2L, "D6")//
+				, new Level(3L, "D8")//
+				, "https://i.kym-cdn.com/entries/icons/original/000/005/316/derpypony.jpg"//
+				, new HashSet<>());
+
+		CharacterDto characterDto2 = new CharacterDto("Prince Rutherford"//
+				, "Yakyak"//
+				, 3//
+				, new HashMap<>()//
+				, new Level(5L, "D12")//
+				, new Level(2L, "D6")//
+				, new Level(3L, "D8")//
+				, ""//
+				, new HashSet<>());
 
 		CharacterEntity character = characterService.generateCharacterFromDto(characterDto);
 

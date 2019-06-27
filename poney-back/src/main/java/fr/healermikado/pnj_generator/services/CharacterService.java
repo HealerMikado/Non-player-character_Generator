@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +44,24 @@ public class CharacterService implements ICharacterService {
 	@Autowired
 	private QuirkService quirkService;
 
+	@Autowired
+	private LevelService LevelService;
+
+	private List<Race> races;
+
 	private static final String DEFAULT_SRC = "https://static1.fjcdn.com/comments/Ghostrollerelite+rolled+a+random+image+posted+in+comment+2724081+at+_b8d37e5c953413851a5e42d88b304a37.png";
+
+	/**
+	 * Get all races from DB. Do it after the construction to only do it once
+	 */
+	@PostConstruct
+	public void initializeRaces() {
+		this.races = iRaceDao.findAll();
+
+	}
 
 	@Override
 	public CharacterDto generateCharacter() {
-		List<Race> races = iRaceDao.findAll();
 		Collections.shuffle(races);
 
 		races.forEach(r -> r.setGenericTalents(talentService.findAllGenericTalent()));
@@ -68,19 +83,24 @@ public class CharacterService implements ICharacterService {
 	}
 
 	/**
-	 * Create a CharacterEntity from a CharacterDto. Call the database to get all
-	 * the usefull info. Check the info
+	 * Create a {@link CharacterEntity} from a {@link CharacterDto}. Because the
+	 * {@link CharacterDto} can be uncomplete we have to check the value before set
+	 * it in the {@link CharacterEntity}
 	 * 
-	 * @param hc
-	 * @return
+	 * @param characterDto the input {@link CharacterDto}
+	 * @return a {@link CharacterEntity} made from a {@link CharacterDto}, but with
+	 *         generate value if needed
 	 */
 	@Override
 	public CharacterEntity generateCharacterFromDto(CharacterDto characterDto) {
 		logger.info("Create empty character");
 		CharacterEntity theCharacterToReturn = new CharacterEntity();
-		/// For know the race have to exist in the DB :(
-		// TODO change that
-		theCharacterToReturn.setRace(iRaceDao.findByName(characterDto.getRace()).get());
+
+		//Set the race with the input race, or get one from the DB
+		theCharacterToReturn.setRace(//
+			iRaceDao.findByName(characterDto.getRace()).orElse(races.get(0))
+			);
+
 		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()));
 		// Generate name if name is empty
 		theCharacterToReturn.setName(StringUtils.isEmpty(characterDto.getName())
@@ -90,20 +110,27 @@ public class CharacterService implements ICharacterService {
 
 		theCharacterToReturn.setLevel(characterDto.getLevel() > 0 ? characterDto.getLevel() : 1);
 
-		// If no src get an image from the dbF
+		// If no src get an image from the db
 		theCharacterToReturn.setSrc(
 				StringUtils.isEmpty(characterDto.getSrc()) ? theCharacterToReturn.getRace().getImages().get(0).getSrc()
 						: characterDto.getSrc());
 		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()));
 
-		theCharacterToReturn.setBodyLevel(new Level(1L, "D4"));
-		theCharacterToReturn.setMindLevel(new Level(1L, "D4"));
-		theCharacterToReturn.setCharmLevel(new Level(1L, "D4"));
+		// Check stat are already state
+		if (StringUtils.isEmpty(characterDto.getBodyLevel()) || StringUtils.isEmpty(characterDto.getMindLevel())
+				|| StringUtils.isEmpty(characterDto.getCharmLevel())) {
+			setStatisticLevel(characterDto);
+		}
+
+		theCharacterToReturn.setBodyLevel(characterDto.getBodyLevel());
+		theCharacterToReturn.setMindLevel(characterDto.getMindLevel());
+		theCharacterToReturn.setCharmLevel(characterDto.getCharmLevel());
 		theCharacterToReturn.setQuirks(new HashSet<>());
 
 		iCharacterDao.save(theCharacterToReturn);
 
 		return theCharacterToReturn;
+
 	}
 
 	public void setStatisticLevel(CharacterDto theCharacterToCreate) {
@@ -148,9 +175,9 @@ public class CharacterService implements ICharacterService {
 			} while (!updated);
 		}
 
-		theCharacterToCreate.setBodyLevel(new LevelDto(talentService.getLevelService().getLevels().get(bodyLevel)));
-		theCharacterToCreate.setMindLevel(new LevelDto(talentService.getLevelService().getLevels().get(mindLevel)));
-		theCharacterToCreate.setCharmLevel(new LevelDto(talentService.getLevelService().getLevels().get(charmLevel)));
+		theCharacterToCreate.setBodyLevel(talentService.getLevelService().getLevels().get(bodyLevel));
+		theCharacterToCreate.setMindLevel(talentService.getLevelService().getLevels().get(mindLevel));
+		theCharacterToCreate.setCharmLevel(talentService.getLevelService().getLevels().get(charmLevel));
 
 	}
 

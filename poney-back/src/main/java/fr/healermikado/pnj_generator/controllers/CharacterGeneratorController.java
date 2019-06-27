@@ -38,6 +38,7 @@ public class CharacterGeneratorController {
 	@PostMapping(value = "/creation")
 	public ResponseEntity<HttpStatus> createCharacter(@RequestBody CharacterDto character) {
 		logger.info("A new pony will be create with info");
+		logger.info(character.toString());
 		characterService.generateCharacterFromDto(character);
 
 		return ResponseEntity.ok(HttpStatus.OK);

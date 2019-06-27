@@ -1,23 +1,23 @@
 package fr.healermikado.pnj_generator.dtos;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
-
 import fr.healermikado.pnj_generator.entity.CharacterEntity;
+import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.entity.Race;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Character
  * 
  */
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -37,13 +37,13 @@ public class CharacterDto {
     private Map<String, LevelDto> talents;
 
     // The body level
-    private LevelDto bodyLevel;
+    private Level bodyLevel;
 
     // The mind level
-    private LevelDto mindLevel;
+    private Level mindLevel;
 
     // The charm level
-    private LevelDto charmLevel;
+    private Level charmLevel;
     
     // The rouce image
     private String src;
@@ -73,12 +73,9 @@ public class CharacterDto {
         this.race = alreadyMadeEntity.getRace().getName();
         this.src = alreadyMadeEntity.getSrc();
         this.quirks = alreadyMadeEntity.getQuirks().stream().map(q-> q.getValue()).collect(Collectors.toSet());
-
-        // Automatic map between entity et dto
-        ModelMapper modelMapper = new ModelMapper();
-        this.bodyLevel = modelMapper.map(alreadyMadeEntity.getBodyLevel(), LevelDto.class);
-        this.mindLevel = modelMapper.map(alreadyMadeEntity.getMindLevel(), LevelDto.class);
-        this.charmLevel = modelMapper.map(alreadyMadeEntity.getCharmLevel(), LevelDto.class);
+        this.bodyLevel = alreadyMadeEntity.getBodyLevel();
+        this.mindLevel = alreadyMadeEntity.getMindLevel();
+        this.charmLevel = alreadyMadeEntity.getCharmLevel();
         
     }
     
