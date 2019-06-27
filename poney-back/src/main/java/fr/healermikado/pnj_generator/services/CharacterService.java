@@ -17,9 +17,7 @@ import org.springframework.util.StringUtils;
 import fr.healermikado.pnj_generator.daos.ICharacterDao;
 import fr.healermikado.pnj_generator.daos.IRaceDao;
 import fr.healermikado.pnj_generator.dtos.CharacterDto;
-import fr.healermikado.pnj_generator.dtos.LevelDto;
 import fr.healermikado.pnj_generator.entity.CharacterEntity;
-import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.entity.Race;
 
 /**

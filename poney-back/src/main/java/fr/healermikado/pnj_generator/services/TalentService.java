@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.ITalentDao;
-import fr.healermikado.pnj_generator.dtos.LevelDto;
+import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.entity.Talent;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +34,7 @@ public class TalentService {
         return iTalentDao.findAllGenericTalent();
     }
 
-    public Map<String, LevelDto> generateTalentsMap(List<Talent> allTalents, int level) {
+    public Map<String, Level> generateTalentsMap(List<Talent> allTalents, int level) {
         // generate the raw list of the talent
         List<String> listTalents = new ArrayList<>();
         for (int i = 0; i < level; i++) {
@@ -66,9 +66,9 @@ public class TalentService {
                 talentsRawLvl.put(nomTalent, 0);
             }
         }
-        Map<String, LevelDto> talentsOut = talentsRawLvl.entrySet().stream()
+        Map<String, Level> talentsOut = talentsRawLvl.entrySet().stream()
                 .collect(Collectors.toMap(e -> e.getKey(), //
-                        e -> new LevelDto(levelService.getLevels().get(e.getValue()))));
+                        e -> levelService.getLevels().get(e.getValue())));
 
         return talentsOut;
 

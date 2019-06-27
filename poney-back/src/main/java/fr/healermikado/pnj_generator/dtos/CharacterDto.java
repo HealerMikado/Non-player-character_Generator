@@ -34,7 +34,7 @@ public class CharacterDto {
     private int level;
 
     // The talents of the pony and theirs level
-    private Map<String, LevelDto> talents;
+    private Map<String, Level> talents;
 
     // The body level
     private Level bodyLevel;

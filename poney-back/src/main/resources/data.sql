@@ -300,7 +300,9 @@ INSERT INTO already_made (id,name, id_race,level, lvl_body, lvl_mind, lvl_charm,
  (3, 'Fluttershy',3,10, 4,4,6, 'http://images.adagio.com/images2/custom_blends/16853.jpg'),
  (4, 'Pinkie Pie',2,10, 5,4,6, 'http://images.adagio.com/images2/custom_blends/16858.jpg'),
  (5, 'Rarity',1,10, 3,5,6,'http://images.adagio.com/images2/custom_blends/16856.jpg'),
- (6, 'Rainbow Dash',3,10, 6,4,4, 'http://images.adagio.com/images2/custom_blends/16855.jpg');
+ (6, 'Rainbow Dash',3,10, 6,4,4, 'http://images.adagio.com/images2/custom_blends/16855.jpg'),
+ (7, 'The Great and Powerfull Trixie',1,5,2,4,4, 'https://pm1.narvii.com/6537/f101a25166c4a0dd6155d78f4cecef5c5825df1b_hq.jpg');
+
 
 INSERT INTO
   quirks (id_quirk, name_quirk)
