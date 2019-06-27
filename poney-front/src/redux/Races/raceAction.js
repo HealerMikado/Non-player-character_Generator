@@ -10,7 +10,13 @@ export const fetchRaces = () => (dispatch, getState) => {
     return fetch("http://localhost:8080/races")
       .then(response => response.json())
       .then(result => {
-        dispatch(setRaces(result));
+        dispatch(
+          setRaces(
+            result.map(race => {
+              return { ...race, nom: `${race.name}` };
+            })
+          )
+        );
       });
   }
 };

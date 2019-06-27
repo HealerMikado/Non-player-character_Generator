@@ -52,8 +52,6 @@ class FormDialog extends React.Component {
   handleRandomClick = pony => {
     const { fetchRandomPony } = this.props;
     fetchRandomPony();
-    console.log(pony.name);
-    this.setState({ name: "tot", race: "okok" });
   };
 
   handleSubmit = pony => {
