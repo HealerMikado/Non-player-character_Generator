@@ -14,7 +14,13 @@ import withStyles from "@material-ui/styles/withStyles";
 import theme from "../../Theme";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addPony } from "../../redux/Poney/poneyAction";
+import {
+  addPony,
+  setPony,
+  fetchRandomPony
+} from "../../redux/Poney/poneyAction";
+import PropTypes from "prop-types";
+
 class FormDialog extends React.Component {
   constructor(props) {
     super(props);
@@ -37,21 +43,37 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+  handleChange = (name, pony) => event => {
+    const { setPony } = this.props;
+    pony[event.target.name] = event.target.value;
+    setPony({ pony });
+  };
+  // Recupère un poney random depuis l'api et affecte les valeurs a l'ihm
+  handleRandomClick = pony => {
+    const { fetchRandomPony } = this.props;
+    fetchRandomPony();
+    console.log(pony.name);
+    this.setState({ name: "tot", race: "okok" });
   };
 
-  handleSubmit = ponies => {
-    ponies.push({
+  handleSubmit = pony => {
+    const { fetchRandomPony, addPony } = this.props;
+    fetchRandomPony(false);
+    pony = {
+      ...pony,
       name: this.state.name,
-      level: this.state.level,
       race: this.state.race,
+      level: this.state.level,
       src: this.state.src
-    });
-    addPony();
+    };
+    addPony(pony);
+    this.setState({ open: false });
+  };
+  componentWillUnmount = () => {
+    fetchRandomPony(true);
   };
   render() {
-    const { children, classes, ponies } = this.props;
+    const { children, classes, pony } = this.props;
     return (
       <React.Fragment>
         {React.cloneElement(children, { onClick: this.handleClickOpen })}
@@ -65,42 +87,47 @@ class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             {
-              // C'est clairement dégueulasse, mais pas le time
+              // Léa passion copié-collé
             }
             <DialogContentText>Ajout de poney</DialogContentText>
             <CssTextField
               className={classes.margin}
               label="Nom"
               variant="outlined"
-              onChange={this.handleChange("name")}
+              onChange={this.handleChange("name", pony)}
+              value={pony.name}
               autoFocus
             />
             <CssTextField
               className={classes.margin}
               label="Espèce"
               variant="outlined"
-              onChange={this.handleChange("race")}
+              onChange={this.handleChange("race", pony)}
+              value={pony.race}
             />
             <CssTextField
               className={classes.margin}
               label="Niveau"
               variant="outlined"
-              onChange={this.handleChange("level")}
+              onChange={this.handleChange("level", pony)}
+              value={pony.level}
             />
             <CssTextField
               className={classes.margin}
               label="Image"
               variant="outlined"
               helperText="src"
-              onChange={this.handleChange("src")}
+              onChange={this.handleChange("src", pony)}
+              value={pony.src}
             />
           </DialogContent>
           <DialogActions>
-            <Tooltip title="Ajouter un nouveau poney random">
+            <Tooltip title="Génerer un nouveau poney random">
               <Fab
                 variant="round"
                 aria-label="AddRandom"
                 className={classes.fab}
+                onClick={this.handleRandomClick}
               >
                 <FilterVintageRounded className={classes.extendedIcon} />
               </Fab>
@@ -114,7 +141,7 @@ class FormDialog extends React.Component {
             this.state.src !== "" ? (
               <Tooltip title="Ajouter un nouveau poney ">
                 <Fab
-                  onClick={this.handleSubmit(ponies)}
+                  onClick={this.handleSubmit}
                   color="primary"
                   className={classes.fab}
                   type="submit"
@@ -182,12 +209,13 @@ const CssTextField = withStyles({
 
 const mapStateToProps = ({ poneyReducer }) => {
   return {
-    ponies: poneyReducer.ponies
+    ponies: poneyReducer.ponies,
+    pony: poneyReducer.pony
   };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addPony }, dispatch);
+  bindActionCreators({ addPony, setPony, fetchRandomPony }, dispatch);
 
 export default withStyles(styles)(
   connect(
@@ -195,3 +223,7 @@ export default withStyles(styles)(
     mapDispatchToProps
   )(FormDialog)
 );
+
+DialogContent.propTypes = {
+  pony: PropTypes.object.isRequired
+};

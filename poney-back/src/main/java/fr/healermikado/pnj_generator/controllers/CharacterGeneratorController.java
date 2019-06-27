@@ -27,6 +27,7 @@ public class CharacterGeneratorController {
     @GetMapping(value = "")
     @ResponseBody
     public CharacterDto generateCharacter() {
+    	System.out.println("yes");
         return characerService.generateCharacter();
     }
     

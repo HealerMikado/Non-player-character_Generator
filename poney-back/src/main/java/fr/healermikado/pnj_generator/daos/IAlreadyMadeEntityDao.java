@@ -17,5 +17,5 @@ public interface IAlreadyMadeEntityDao extends CrudRepository<CharacterEntity, L
     public Optional<CharacterEntity> findById(Long id);
     
     public List<CharacterEntity> findAll();
-    
+
 }

@@ -16,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +26,6 @@ import lombok.Setter;
 @Table(name = "races")
 @Getter
 @Setter
-@AllArgsConstructor
 public class Race {
 
     @Id
@@ -58,10 +56,4 @@ public class Race {
         allTalents.addAll(genericTalents);
         return allTalents;
     }
-
-
-	public Race(long id, String Nom) {
-		this.id = id;
-		
-	}
 }

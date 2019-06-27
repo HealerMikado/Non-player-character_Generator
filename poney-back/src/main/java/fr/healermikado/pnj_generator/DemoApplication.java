@@ -17,11 +17,7 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 		
-	    @Override
-	    public void run(String... args) {
-	        // Create a couple of Book and BookCategory
-	    	alreadyMadeEntityDao.save(new CharacterEntity(7L, "toto", "photo", new Race(4L, "Dragon"), ));
-	    }
+	
 	}
 
 }

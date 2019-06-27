@@ -4,6 +4,7 @@ export const setPonies = ponies => {
     ponies
   };
 };
+
 export const setPony = pony => {
   return {
     type: "SET_PONY",
@@ -18,9 +19,15 @@ export const addPony = pony => {
   };
 };
 
-export const fetchPonies = () => {
+export const handleEqualChange = event => {
+  this.setState({
+    equal: event.target.value
+  });
+};
+
+export const fetchPonies = (x = false) => {
   return (dispatch, getState) => {
-    if (getState().poneyReducer.ponies.length === 0) {
+    if (x || getState().poneyReducer.ponies.length === 0) {
       fetch("http://localhost:8080/characters")
         .then(response => response.json())
         .then(result => {
@@ -30,12 +37,14 @@ export const fetchPonies = () => {
   };
 };
 
-export const fetchRandomPony = () => {
+export const fetchRandomPony = (x = true) => {
   return (dispatch, getState) => {
-    fetch("http://localhost:8080/generate")
-      .then(response => response.json())
-      .then(result => {
-        dispatch(setPony(result));
-      });
+    if (x || getState().poneyReducer.pony.mindLevel.length === 0) {
+      fetch("http://localhost:8080/generate")
+        .then(response => response.json())
+        .then(result => {
+          dispatch(setPony(result));
+        });
+    }
   };
 };

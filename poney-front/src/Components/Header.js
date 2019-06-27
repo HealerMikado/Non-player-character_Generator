@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <div fluid className={classes.div}>
+      <div className={classes.div}>
         <img
           src="https://vignette.wikia.nocookie.net/mlpfimroleplay/images/0/0e/Community-header-background/revision/latest?cb=20170613202503"
           alt=":)"

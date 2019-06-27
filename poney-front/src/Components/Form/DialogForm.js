@@ -1,5 +1,5 @@
 import React from "React";
-import { Paper, Tooltip, Fab } from "@material-ui/core";
+import { Tooltip, Fab } from "@material-ui/core";
 import { FilterVintageRounded } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import FormDialog from "./FormDialog";

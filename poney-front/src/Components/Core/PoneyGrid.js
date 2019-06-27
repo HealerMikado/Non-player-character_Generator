@@ -5,33 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 class PoneyGrid extends Component {
-  constructor() {
-    super();
-    this.state = { ponies: [] };
-  }
-
-  /**
-   * Quand on va créer le composant on va chercher tous les poney
-   */
-  componentDidMount() {
-    this.getAllPonies();
-  }
-
-  /**
-   * Get all the ponies !
-   */
-  getAllPonies = () => {
-    let thisG = this;
-
-    fetch("http://localhost:8080/characters")
-      .then(response => response.json())
-      .then(function(result) {
-        console.log(result);
-        thisG.setState({ ponies: result });
-        console.log(thisG.state.pony);
-      });
-  };
-
   render() {
     const { classes, ponies } = this.props;
     return (
@@ -65,6 +38,9 @@ const styles = {
 };
 const mapStateToProps = ({ poneyReducer }) => {
   return {
+    /**
+     * Get all the ponies !
+     */
     ponies: poneyReducer.ponies
   };
 };
