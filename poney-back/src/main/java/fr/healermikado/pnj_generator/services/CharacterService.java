@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,6 +25,7 @@ import fr.healermikado.pnj_generator.entity.Race;
  */
 @Service
 public class CharacterService implements ICharacterService {
+	private Logger logger = LoggerFactory.getLogger(CharacterService.class);
 	@Autowired
 	private ICharacterDao iCharacterDao;
 	@Autowired
@@ -71,17 +74,22 @@ public class CharacterService implements ICharacterService {
 	 */
 	@Override
 	public CharacterEntity generateCharacterFromDto(CharacterDto characterDto) {
+		logger.info("Create empty character");
 		CharacterEntity theCharacterToReturn = new CharacterEntity();
 		///For know the race have to exist in the DB :(
 		//TODO change that
 		theCharacterToReturn.setRace(iRaceDao.findByName(characterDto.getRace()).get());
+		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()) );
 		//Generate name if name is empty
 		theCharacterToReturn.setName(StringUtils.isEmpty(characterDto.getName())
 				? tokenService.generateRandomName(theCharacterToReturn.getRace().getPossibleToken())
 				: characterDto.getName());
+		logger.debug(String.format("Name of the generate character %s", theCharacterToReturn.getName()) );
 
 		// If no src default image
 		theCharacterToReturn.setSrc(StringUtils.isEmpty(characterDto.getSrc())?DEFAULT_SRC:characterDto.getSrc());
+		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()) );
+
 		theCharacterToReturn.setBodyLevel(new Level(1L, "D4"));
 		theCharacterToReturn.setMindLevel(new Level(1L, "D4"));
 		theCharacterToReturn.setCharmLevel(new Level(1L, "D4"));
@@ -93,7 +101,7 @@ public class CharacterService implements ICharacterService {
 	}
 
 	public void setStatisticLevel(CharacterDto theCharacterToCreate) {
-		int bodyLevel = 0;
+		int bodyLevel = theCharacterToCreate.getRace()=="Poney terrestre" ? 1:0;
 		int mindLevel = 0;
 		int charmLevel = 1;
 

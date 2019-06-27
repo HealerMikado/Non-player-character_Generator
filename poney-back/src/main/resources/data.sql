@@ -278,13 +278,13 @@ VALUES
   (5, 'D12'),
   (6, 'D20');
 
-INSERT INTO already_made (id,name, id_race, lvl_body, lvl_mind, lvl_charm, src) VALUES
- (1, 'Twilight Sparkle',1, 4,6,5, 'http://images.adagio.com/images2/custom_blends/16854.jpg'),
- (2, 'Applejack',2, 6,5,4, 'http://images.adagio.com/images2/custom_blends/16857.jpg'),
- (3, 'Fluttershy',3, 4,4,6, 'http://images.adagio.com/images2/custom_blends/16853.jpg'),
- (4, 'Pinkie Pie',2, 5,4,6, 'http://images.adagio.com/images2/custom_blends/16858.jpg'),
- (5, 'Rarity',1, 3,5,6,'http://images.adagio.com/images2/custom_blends/16856.jpg'),
- (6, 'Rainbow Dash',3, 6,4,4, 'http://images.adagio.com/images2/custom_blends/16855.jpg');
+INSERT INTO already_made (id,name, id_race,level, lvl_body, lvl_mind, lvl_charm, src) VALUES
+ (1, 'Twilight Sparkle',1,11, 4,6,5, 'http://images.adagio.com/images2/custom_blends/16854.jpg'),
+ (2, 'Applejack',2,10, 6,5,4, 'http://images.adagio.com/images2/custom_blends/16857.jpg'),
+ (3, 'Fluttershy',3,10, 4,4,6, 'http://images.adagio.com/images2/custom_blends/16853.jpg'),
+ (4, 'Pinkie Pie',2,10, 5,4,6, 'http://images.adagio.com/images2/custom_blends/16858.jpg'),
+ (5, 'Rarity',1,10, 3,5,6,'http://images.adagio.com/images2/custom_blends/16856.jpg'),
+ (6, 'Rainbow Dash',3,10, 6,4,4, 'http://images.adagio.com/images2/custom_blends/16855.jpg');
 
 INSERT INTO
   quirks (id_quirk, name_quirk)

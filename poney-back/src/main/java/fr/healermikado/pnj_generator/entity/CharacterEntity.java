@@ -40,6 +40,9 @@ public class CharacterEntity {
     private Long id;
     @Column
     private String name;
+    
+    @Column(name="level")
+    private int characterLevel;
 
     @Column(columnDefinition = "VARCHAR(500)")
     private String src;

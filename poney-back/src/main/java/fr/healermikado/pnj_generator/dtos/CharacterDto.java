@@ -69,6 +69,7 @@ public class CharacterDto {
 
         
         this.name = alreadyMadeEntity.getName();
+        this.level = alreadyMadeEntity.getCharacterLevel();
         this.race = alreadyMadeEntity.getRace().getName();
         this.src = alreadyMadeEntity.getSrc();
         this.quirks = alreadyMadeEntity.getQuirks().stream().map(q-> q.getValue()).collect(Collectors.toSet());

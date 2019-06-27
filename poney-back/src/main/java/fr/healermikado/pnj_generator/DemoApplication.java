@@ -2,6 +2,8 @@ package fr.healermikado.pnj_generator;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +15,7 @@ import fr.healermikado.pnj_generator.services.CharacterService;
 
 @SpringBootApplication
 public class DemoApplication {
+	Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 	@Autowired
 	CharacterService characterService;
 
@@ -23,15 +26,17 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+	/**
+	 * A little insertion test
+	 */
 	@PostConstruct
 	public void test() {
-
-		System.out.println("toto");
-
-		CharacterDto characterDto = new CharacterDto("Derpy", "Pégase", 3, "https://i.kym-cdn.com/entries/icons/original/000/005/316/derpypony.jpg");
+		CharacterDto characterDto = new CharacterDto("Derpy", "Pégase", 3,
+				"https://i.kym-cdn.com/entries/icons/original/000/005/316/derpypony.jpg");
 
 		CharacterEntity character = characterService.generateCharacterFromDto(characterDto);
 
+		logger.info("Save a new pony");
 		iCharacterDao.save(character);
 	}
 

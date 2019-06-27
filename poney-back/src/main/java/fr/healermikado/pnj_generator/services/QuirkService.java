@@ -25,20 +25,18 @@ public class QuirkService {
     @Autowired
     private IQuirkDao iQuirkDao;
 
-    private List<QuirkEntity> quirks;
 
-    @PostConstruct
-    private void initializeQuirks() {
-        quirks = iQuirkDao.findAll();
+
+    private List<QuirkEntity> getAllQuirksFromDb() {
+       return iQuirkDao.findAll();
     }
 
     public List<QuirkEntity> getSomeQuirkEntities(int numberOfQuirksToReturn){
-
         List<QuirkEntity> quirksToReturn = new ArrayList<>();
-        List<QuirkEntity> workingQuirks = quirks;
+        List<QuirkEntity> workingQuirks = getAllQuirksFromDb();       
         for (int i = 0; i < numberOfQuirksToReturn; i++) {
             //generate a random number
-
+        	
             int randomNumber = ThreadLocalRandom.current().nextInt(workingQuirks.size());
             quirksToReturn.add(workingQuirks.get(randomNumber));
             workingQuirks.remove(randomNumber);
