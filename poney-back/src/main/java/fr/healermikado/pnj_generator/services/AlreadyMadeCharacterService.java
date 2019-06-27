@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.healermikado.pnj_generator.daos.IAlreadyMadeEntityDao;
+import fr.healermikado.pnj_generator.daos.ICharacterDao;
 import fr.healermikado.pnj_generator.dtos.CharacterDto;
 import fr.healermikado.pnj_generator.entity.CharacterEntity;
 
@@ -18,7 +18,7 @@ import fr.healermikado.pnj_generator.entity.CharacterEntity;
 public class AlreadyMadeCharacterService {
 
     @Autowired
-    private IAlreadyMadeEntityDao iAlreadyMadeEntityDao;
+    private ICharacterDao iAlreadyMadeEntityDao;
 
     public CharacterDto getCharacterById(Long id) {
         Optional<CharacterEntity> optCharEntity = iAlreadyMadeEntityDao.findById(id);

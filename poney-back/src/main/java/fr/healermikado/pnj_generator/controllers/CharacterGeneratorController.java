@@ -10,30 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import fr.healermikado.pnj_generator.dtos.CharacterDto;
-import fr.healermikado.pnj_generator.dtos.HalfWayCharacter;
+import fr.healermikado.pnj_generator.entity.CharacterEntity;
 import fr.healermikado.pnj_generator.services.ICharacterService;
 
 /**
  * CharacterGeneratorController
  */
 @RestController
-@RequestMapping(value="/generate", produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/generate", produces = "application/json;charset=UTF-8")
 @CrossOrigin(origins = "http://localhost:3000")
 public class CharacterGeneratorController {
-    @Autowired
-    public ICharacterService characerService;
+	@Autowired
+	public ICharacterService characterService;
 
-    @GetMapping(value = "")
-    @ResponseBody
-    public CharacterDto generateCharacter() {
-        return characerService.generateCharacter();
-    }
-    
-//    @PostMapping(value="creation")
-//    public ResponseEntity<HttpStatus> createCharacter(@RequestBody HalfWayCharacter character) {
-//    	characerService.generateCharacter(character);
-//    	return ResponseEntity.ok(HttpStatus.OK);
-//    }
-    
+	@GetMapping(value = "")
+	@ResponseBody
+	public CharacterDto generateCharacter() {
+		return characterService.generateCharacter();
+	}
+
+	@PostMapping(value = "/creation")
+	public ResponseEntity<HttpStatus> createCharacter(@RequestBody CharacterDto character) {
+		characterService.generateCharacterFromDto(character);
+
+		return ResponseEntity.ok(HttpStatus.OK);
+	}
+
 }
