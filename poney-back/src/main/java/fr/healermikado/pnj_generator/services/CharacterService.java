@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -24,6 +26,8 @@ import fr.healermikado.pnj_generator.entity.Race;
 @Service
 public class CharacterService implements ICharacterService {
 
+	private Logger logger = LoggerFactory.getLogger(CharacterService.class);
+
 	@Autowired
 	private ICharacterDao iCharacterDao;
 	@Autowired
@@ -37,7 +41,7 @@ public class CharacterService implements ICharacterService {
 
 	@Autowired
 	private QuirkService quirkService;
-	
+
 	private static final String DEFAULT_SRC = "https://static1.fjcdn.com/comments/Ghostrollerelite+rolled+a+random+image+posted+in+comment+2724081+at+_b8d37e5c953413851a5e42d88b304a37.png";
 
 	@Override
@@ -65,24 +69,33 @@ public class CharacterService implements ICharacterService {
 
 	/**
 	 * Create a CharacterEntity from a CharacterDto. Call the database to get all
-	 * the usefull info
+	 * the usefull info. Check the info
 	 * 
 	 * @param hc
 	 * @return
 	 */
 	@Override
 	public CharacterEntity generateCharacterFromDto(CharacterDto characterDto) {
+		logger.info("Create empty character");
 		CharacterEntity theCharacterToReturn = new CharacterEntity();
-		///For know the race have to exist in the DB :(
-		//TODO change that
+		/// For know the race have to exist in the DB :(
+		// TODO change that
 		theCharacterToReturn.setRace(iRaceDao.findByName(characterDto.getRace()).get());
-		//Generate name if name is empty
+		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()));
+		// Generate name if name is empty
 		theCharacterToReturn.setName(StringUtils.isEmpty(characterDto.getName())
 				? tokenService.generateRandomName(theCharacterToReturn.getRace().getPossibleToken())
 				: characterDto.getName());
+		logger.debug(String.format("Name of the generate character %s", theCharacterToReturn.getName()));
 
-		// If no src default image
-		theCharacterToReturn.setSrc(StringUtils.isEmpty(characterDto.getSrc())?DEFAULT_SRC:characterDto.getSrc());
+		theCharacterToReturn.setLevel(characterDto.getLevel() > 0 ? characterDto.getLevel() : 1);
+
+		// If no src get an image from the dbF
+		theCharacterToReturn.setSrc(
+				StringUtils.isEmpty(characterDto.getSrc()) ? theCharacterToReturn.getRace().getImages().get(0).getSrc()
+						: characterDto.getSrc());
+		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()));
+
 		theCharacterToReturn.setBodyLevel(new Level(1L, "D4"));
 		theCharacterToReturn.setMindLevel(new Level(1L, "D4"));
 		theCharacterToReturn.setCharmLevel(new Level(1L, "D4"));
@@ -94,7 +107,7 @@ public class CharacterService implements ICharacterService {
 	}
 
 	public void setStatisticLevel(CharacterDto theCharacterToCreate) {
-		int bodyLevel = 0;
+		int bodyLevel = theCharacterToCreate.getRace() == "Poney terrestre" ? 1 : 0;
 		int mindLevel = 0;
 		int charmLevel = 1;
 

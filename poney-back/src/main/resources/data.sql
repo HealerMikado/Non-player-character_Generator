@@ -9,6 +9,22 @@ VALUES
   (6, 'Changelin'),
   (7, 'Yakyak'),
   (8, 'Chien de cristal');
+  
+ INSERT INTO
+   image_race (id,id_race, src)
+  VALUES 
+  (1,1,'https://derpicdn.net/img/2017/12/15/1608652/large.png'),
+  (2,1,'https://www.pngkey.com/png/detail/129-1299692_unicorn-transparent-pony-female-mlp-oc-unicorn.png'),
+  (3,3,'http://ekladata.com/AzMCNYQYtaOZ82uDZ3mv11-xkzY@430x430.jpg'),
+  (4,2,'https://www.pngfind.com/pngs/m/455-4551372_capt-nemo-beauty-brass-bowtie-earth-pony-female.png'),
+  (5,4,'https://3.bp.blogspot.com/-E5-dm_mn74c/WnymkbYnsTI/AAAAAAAC8YE/t82Qb3Xv1so_kri5DDyxlNCvWt3Px_0cgCLcBGAs/s1600/f1e.png'),
+  (6,5,'https://vignette.wikia.nocookie.net/the-stuingtion-and-hiatt-grey-cinematic-universe/images/e/ef/Vector_855_gallus_by_dashiesparkle-dc6xg9p.png/revision/latest?cb=20190321015621'),
+  (7,6,'https://banner2.kisspng.com/20180802/b/kisspng-pony-deviantart-changeling-digital-art-reformed-changeling-mlp-oc-bing-images-5b6336ffbe5d71.4498614515332287997797.jpg'),
+  (8,7,'https://banner2.kisspng.com/20180328/hew/kisspng-pony-domestic-yak-yak-5abc0a35c7b222.475868381522272821818.jpg'),
+  (9,8,'https://banner2.kisspng.com/20180422/sxw/kisspng-my-little-pony-dog-rarity-twilight-sparkle-dogs-vector-5add571b0bddd1.9888000015244551950486.jpg');
+  
+  
+  
 INSERT INTO
   talents (id_talent, nom)
 VALUES
@@ -278,13 +294,13 @@ VALUES
   (5, 'D12'),
   (6, 'D20');
 
-INSERT INTO already_made (id,name, id_race, lvl_body, lvl_mind, lvl_charm, src) VALUES
- (1, 'Twilight Sparkle',1, 4,6,5, 'http://images.adagio.com/images2/custom_blends/16854.jpg'),
- (2, 'Applejack',2, 6,5,4, 'http://images.adagio.com/images2/custom_blends/16857.jpg'),
- (3, 'Fluttershy',3, 4,4,6, 'http://images.adagio.com/images2/custom_blends/16853.jpg'),
- (4, 'Pinkie Pie',2, 5,4,6, 'http://images.adagio.com/images2/custom_blends/16858.jpg'),
- (5, 'Rarity',1, 3,5,6,'http://images.adagio.com/images2/custom_blends/16856.jpg'),
- (6, 'Rainbow Dash',3, 6,4,4, 'http://images.adagio.com/images2/custom_blends/16855.jpg');
+INSERT INTO already_made (id,name, id_race,level, lvl_body, lvl_mind, lvl_charm, src) VALUES
+ (1, 'Twilight Sparkle',1,11, 4,6,5, 'http://images.adagio.com/images2/custom_blends/16854.jpg'),
+ (2, 'Applejack',2,10, 6,5,4, 'http://images.adagio.com/images2/custom_blends/16857.jpg'),
+ (3, 'Fluttershy',3,10, 4,4,6, 'http://images.adagio.com/images2/custom_blends/16853.jpg'),
+ (4, 'Pinkie Pie',2,10, 5,4,6, 'http://images.adagio.com/images2/custom_blends/16858.jpg'),
+ (5, 'Rarity',1,10, 3,5,6,'http://images.adagio.com/images2/custom_blends/16856.jpg'),
+ (6, 'Rainbow Dash',3,10, 6,4,4, 'http://images.adagio.com/images2/custom_blends/16855.jpg');
 
 INSERT INTO
   quirks (id_quirk, name_quirk)
