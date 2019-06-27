@@ -19,25 +19,23 @@ import fr.healermikado.pnj_generator.services.ICharacterService;
  * CharacterGeneratorController
  */
 @RestController
-@RequestMapping(value="/generate", produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/generate", produces = "application/json;charset=UTF-8")
 @CrossOrigin(origins = "http://localhost:3000")
 public class CharacterGeneratorController {
-    @Autowired
-    public ICharacterService characterService;
+	@Autowired
+	public ICharacterService characterService;
 
-    @GetMapping(value = "")
-    @ResponseBody
-    public CharacterDto generateCharacter() {
-        return characterService.generateCharacter();
-    }
-    
-   @PostMapping(value="/creation")
-   public ResponseEntity<HttpStatus> createCharacter(@RequestBody CharacterDto character) {
+	@GetMapping(value = "")
+	@ResponseBody
+	public CharacterDto generateCharacter() {
+		return characterService.generateCharacter();
+	}
 
-    
+	@PostMapping(value = "/creation")
+	public ResponseEntity<HttpStatus> createCharacter(@RequestBody CharacterDto character) {
 		characterService.generateCharacterFromDto(character);
 
-   	return ResponseEntity.ok(HttpStatus.OK);
-   }
-    
+		return ResponseEntity.ok(HttpStatus.OK);
+	}
+
 }
