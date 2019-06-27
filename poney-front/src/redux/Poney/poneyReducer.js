@@ -20,6 +20,10 @@ export const poneyReducer = (state = initialState, action) => {
         ...state,
         ponies: [...state.ponies, action.pony]
       };
+    case "POST_PONIES":
+      return {
+        ...state
+      };
     default:
       return state;
   }

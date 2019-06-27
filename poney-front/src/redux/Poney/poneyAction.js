@@ -19,27 +19,51 @@ export const addPony = pony => {
   };
 };
 
-export const handleEqualChange = event => {
-  this.setState({
-    equal: event.target.value
-  });
+export const fetchPonies = (isChargement = false) => (dispatch, getState) => {
+  if (isChargement || getState().poneyReducer.ponies.length === 0) {
+    return fetch("http://localhost:8080/characters")
+      .then(response => response.json())
+      .then(result => {
+        dispatch(setPonies(result));
+      });
+  }
 };
 
-export const fetchPonies = (x = false) => {
-  return (dispatch, getState) => {
-    if (x || getState().poneyReducer.ponies.length === 0) {
-      fetch("http://localhost:8080/characters")
-        .then(response => response.json())
-        .then(result => {
-          dispatch(setPonies(result));
-        });
-    }
+export const fetchPonyById = name => {
+  return dispatch => {
+    fetch(`{http://localhost:8080/characters/${name}}`)
+      .then(response => response.json())
+      .then(result => {
+        dispatch(setPony(result));
+      });
   };
 };
 
-export const fetchRandomPony = (x = true) => {
+export const postPonies = ponies => {
   return (dispatch, getState) => {
-    if (x || getState().poneyReducer.pony.mindLevel.length === 0) {
+    fetch(
+      "http://localhost:8080/characters",
+      this.state.ponies,
+      {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json"
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(setPonies)
+      }.then(response => response.json())
+    );
+  };
+};
+
+export const fetchRandomPony = (isChargement = true) => {
+  return (dispatch, getState) => {
+    if (isChargement || getState().poneyReducer.pony.mindLevel.length === 0) {
       fetch("http://localhost:8080/generate")
         .then(response => response.json())
         .then(result => {

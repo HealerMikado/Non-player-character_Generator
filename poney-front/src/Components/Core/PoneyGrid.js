@@ -9,7 +9,7 @@ class PoneyGrid extends Component {
     const { classes, ponies } = this.props;
     return (
       <React.Fragment>
-        <Grid Container spacing={6}>
+        <Grid container spacing={6}>
           <Grid item xs={12} className={classes.gridItem}>
             {ponies.map((pony, i) => (
               <PoneyCard className={classes.PoneyCard} pony={pony} />
@@ -32,6 +32,7 @@ const styles = {
     marginBottom: "10px"
   },
   gridItem: {
+    marginLeft: 20,
     display: "inline-block",
     padding: 20
   }

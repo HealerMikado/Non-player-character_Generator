@@ -16,7 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -26,6 +28,8 @@ import lombok.Setter;
 @Table(name = "races")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Race {
 
     @Id
@@ -34,7 +38,7 @@ public class Race {
     private Long idRace;
 
     @Column
-    private String nom;
+    private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "link_race_talent", joinColumns = { @JoinColumn(name = "id_race") }, inverseJoinColumns = {

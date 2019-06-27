@@ -135,10 +135,10 @@ class FormDialog extends React.Component {
             {
               //Pareil
             }
-            {this.state.name !== "" &&
-            this.state.race !== "" &&
-            this.state.level !== "" &&
-            this.state.src !== "" ? (
+            {pony.src !== undefined &&
+            pony.race !== undefined &&
+            pony.name !== undefined &&
+            pony.level !== undefined ? (
               <Tooltip title="Ajouter un nouveau poney ">
                 <Fab
                   onClick={this.handleSubmit}

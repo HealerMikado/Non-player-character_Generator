@@ -11,8 +11,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import PoneyGrid from "./PoneyGrid";
 import theme from "../../Theme";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchPonies, setPonies } from "../../redux/Poney/poneyAction";
+import * as poneyReducer from "../../redux/Poney/index";
+import * as raceReducer from "../../redux/Races/index";
 import FormDialog from "../Form/FormDialog";
 class Core extends React.Component {
   constructor(props) {
@@ -28,13 +28,16 @@ class Core extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchPonies } = this.props;
+    const { fetchPonies, fetchRaces } = this.props;
     fetchPonies();
+    fetchRaces();
   }
   componentWillUnmount() {
     const { setPonies } = this.props;
     setPonies();
   }
+
+  handleSubmit() {}
 
   render() {
     const { classes } = this.props;
@@ -52,7 +55,7 @@ class Core extends React.Component {
         </Tooltip>
         <Paper className={classes.paper}>
           <h1 className={classes.h1}>Ecurie</h1>
-          <FormDialog>
+          <FormDialog handleClick={this.handleSubmit()}>
             <Fab variant="extended" aria-label="Add" className={classes.fab}>
               <Add className={classes.extendedIcon} />
               &nbsp; Ajouter un nouveau poney
@@ -142,12 +145,24 @@ const styles = {
   }
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ fetchPonies, setPonies }, dispatch);
-
-const mapStateToProps = ({ poneyReducer }) => {
+const mapDispatchToProps = dispatch => {
   return {
-    ponies: poneyReducer.ponies
+    fetchPonies: isChargement => {
+      dispatch(poneyReducer.fetchPonies(isChargement));
+    },
+    setPonies: ponies => {
+      dispatch(poneyReducer.setPonies(ponies));
+    },
+    fetchRaces: () => {
+      dispatch(raceReducer.fetchRaces());
+    }
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    ponies: state.poneyReducer.ponies,
+    races: state.raceReducer.races
   };
 };
 

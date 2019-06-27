@@ -4,7 +4,6 @@ import Header from "./Components/Header";
 import Menu from "./Components/Menu";
 import Core from "./Components/Core/Core";
 import Theme from "./Theme";
-import { makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import Footer from "./Components/Core/Footer";
 
