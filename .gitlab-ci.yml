@@ -33,5 +33,5 @@ deploy:
     tags:
       - shell
     script: 
-      - "cat marathon-group.json | envsubst | curl -d@- -H \"Content-Type: application/json\" -X PUT http://deploy.alpha.innovation.insee.eu/v2/groups/$GROUP_ID?force=true"
+      - "cat marathon.json | envsubst | curl -d@- -H \"Content-Type: application/json\" -X PUT http://deploy.alpha.innovation.insee.eu/v2/groups/$GROUP_ID?force=true"
 
