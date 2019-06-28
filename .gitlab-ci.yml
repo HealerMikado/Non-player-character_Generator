@@ -18,6 +18,7 @@ buildjava:
   tags:
     - shell
   script:
+    - 'cd poney-back/'
     - 'mvn $MAVEN_CLI_OPTS package'
     - 'docker build -f java.Dockerfile -t $DOCKER_TAG .'
     - 'docker push $DOCKER_TAG'
