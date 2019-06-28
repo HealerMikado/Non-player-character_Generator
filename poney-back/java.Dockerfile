@@ -1,7 +1,7 @@
-FROM tomcat:9-jdk11-openjdk
+FROM openjdk:8-jdk-alpine
 
-# Delete existing ROOT folder
-RUN rm -rf $CATALINA_HOME/webapps/*
 
 # Copy to images tomcat path
-COPY /target/pnj_generator-0.0.1-SNAPSHOT.war $CATALINA_HOME/webapps/ROOT.war
+COPY /target/pnj_generator-0.0.1-SNAPSHOT.war /usr/app/pnj_generator.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar"]
