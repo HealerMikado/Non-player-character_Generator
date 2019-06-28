@@ -3,6 +3,7 @@ package fr.healermikado.pnj_generator.services;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -181,6 +182,21 @@ public class CharacterService implements ICharacterService {
 		theCharacterToCreate.setMindLevel(talentService.getLevelService().getLevels().get(mindLevel));
 		theCharacterToCreate.setCharmLevel(talentService.getLevelService().getLevels().get(charmLevel));
 
+	}
+
+	public CharacterDto getCharacterById(Long id) {
+        Optional<CharacterEntity> optCharEntity = iCharacterDao.findById(id);
+        CharacterDto outputedCharacterDto = null;
+
+        if (optCharEntity.isPresent()) { 
+            outputedCharacterDto = new CharacterDto(iCharacterDao.findById(id).get());
+        }
+
+        return outputedCharacterDto;
+    }
+
+	public List<CharacterDto> getAllCharacter() {
+		return iCharacterDao.findAll().stream().map(p-> new CharacterDto(p)).collect(Collectors.toList());
 	}
 
 }
