@@ -1,5 +1,5 @@
 {
-  "id": "GROUP_ID/",
+  "id": "/${GROUP_ID}/",
   "apps": [
     {
       "id": "back",
