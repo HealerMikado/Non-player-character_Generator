@@ -77,11 +77,10 @@ public class CharacterService implements ICharacterService {
 		outputCharacter.setQuirks(
 				quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toSet()));
 		setStatisticLevel(outputCharacter);
-		//set the src
+		// set the src
 		outputCharacter.setSrc(race.getImages().get(0).getSrc());
 		logger.debug(String.format("Src of the generate character %s", outputCharacter.getSrc()));
 
-		
 		return outputCharacter;
 	}
 
@@ -99,10 +98,9 @@ public class CharacterService implements ICharacterService {
 		logger.info("Create empty character");
 		CharacterEntity theCharacterToReturn = new CharacterEntity();
 
-		//Set the race with the input race, or get one from the DB
+		// Set the race with the input race, or get one from the DB
 		theCharacterToReturn.setRace(//
-			iRaceDao.findByName(characterDto.getRace()).orElse(races.get(0))
-			);
+				iRaceDao.findByName(characterDto.getRace()).orElse(races.get(0)));
 
 		logger.debug(String.format("Race of the generate character %s", theCharacterToReturn.getRace()));
 		// Generate name if name is empty
@@ -114,9 +112,13 @@ public class CharacterService implements ICharacterService {
 		theCharacterToReturn.setLevel(characterDto.getLevel() > 0 ? characterDto.getLevel() : 1);
 
 		// If no src get an image from the db
-		theCharacterToReturn.setSrc(
-				StringUtils.isEmpty(characterDto.getSrc()) ? theCharacterToReturn.getRace().getImages().get(0).getSrc()
-						: characterDto.getSrc());
+		if (StringUtils.isEmpty(characterDto.getSrc())) {
+			Collections.shuffle(theCharacterToReturn.getRace().getImages());
+			theCharacterToReturn.setSrc(theCharacterToReturn.getRace().getImages().get(0).getSrc());
+		} else {
+			characterDto.getSrc();
+		}
+
 		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()));
 
 		// Check stat are already state
@@ -185,18 +187,18 @@ public class CharacterService implements ICharacterService {
 	}
 
 	public CharacterDto getCharacterById(Long id) {
-        Optional<CharacterEntity> optCharEntity = iCharacterDao.findById(id);
-        CharacterDto outputedCharacterDto = null;
+		Optional<CharacterEntity> optCharEntity = iCharacterDao.findById(id);
+		CharacterDto outputedCharacterDto = null;
 
-        if (optCharEntity.isPresent()) { 
-            outputedCharacterDto = new CharacterDto(iCharacterDao.findById(id).get());
-        }
+		if (optCharEntity.isPresent()) {
+			outputedCharacterDto = new CharacterDto(iCharacterDao.findById(id).get());
+		}
 
-        return outputedCharacterDto;
-    }
+		return outputedCharacterDto;
+	}
 
 	public List<CharacterDto> getAllCharacter() {
-		return iCharacterDao.findAll().stream().map(p-> new CharacterDto(p)).collect(Collectors.toList());
+		return iCharacterDao.findAll().stream().map(p -> new CharacterDto(p)).collect(Collectors.toList());
 	}
 
 }

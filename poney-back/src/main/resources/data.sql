@@ -21,10 +21,13 @@ VALUES
   (6,5,'https://vignette.wikia.nocookie.net/the-stuingtion-and-hiatt-grey-cinematic-universe/images/e/ef/Vector_855_gallus_by_dashiesparkle-dc6xg9p.png/revision/latest?cb=20190321015621'),
   (7,6,'https://banner2.kisspng.com/20180802/b/kisspng-pony-deviantart-changeling-digital-art-reformed-changeling-mlp-oc-bing-images-5b6336ffbe5d71.4498614515332287997797.jpg'),
   (8,7,'https://banner2.kisspng.com/20180328/hew/kisspng-pony-domestic-yak-yak-5abc0a35c7b222.475868381522272821818.jpg'),
-  (9,8,'https://banner2.kisspng.com/20180422/sxw/kisspng-my-little-pony-dog-rarity-twilight-sparkle-dogs-vector-5add571b0bddd1.9888000015244551950486.jpg');
-  
-  
-  
+  (9,8,'https://banner2.kisspng.com/20180422/sxw/kisspng-my-little-pony-dog-rarity-twilight-sparkle-dogs-vector-5add571b0bddd1.9888000015244551950486.jpg'),
+  (10,3,'https://vignette.wikia.nocookie.net/p__/images/2/20/Flash_sentry_vector_by_sapphireskies24-d8l6t33.png/revision/latest?cb=20181030075621&path-prefix=protagonist'),
+  (11,3,'https://i.pinimg.com/originals/22/93/69/229369679d6b7c896934309c334396b3.png'),
+  (12,2,'http://images6.fanpop.com/image/photos/36600000/Doctor-Whooves-image-doctor-whooves-36654337-950-841.png'),
+  (13,2,'https://i.pinimg.com/originals/41/85/ec/4185ec4ad8445fdae382a1ef67453d1d.png'),
+  (14,1,'https://derpicdn.net/img/2015/2/20/832954/full.png'),
+  (15,1,'https://i.ya-webdesign.com/images/mlp-tongue-click-png-4.png');
 INSERT INTO
   talents (id_talent, nom)
 VALUES
