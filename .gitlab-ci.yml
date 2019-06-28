@@ -1,11 +1,16 @@
 variables:
   GIT_SSL_NO_VERIFY: "1"
-  DOCKER_TAG: docker-registry.beta.innovation.insee.eu/coding_dojo/pnj_generator_java
+  # The docker tag of the java app
+  DOCKER_TAG_JAVA: docker-registry.beta.innovation.insee.eu/coding_dojo/pnj_generator_java
+  # Some maven optimisation
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
-
+  # The groupe id for marathon
+  GROUP_ID: /coding-dojo_sndio
+  
 stages:
   - test
   - build
+  - deploy
 
 helloworld:
   stage: test
@@ -20,6 +25,13 @@ buildjava:
   script:
     - 'cd poney-back/'
     - 'mvn $MAVEN_CLI_OPTS package'
-    - 'docker build -f java.Dockerfile -t $DOCKER_TAG .'
-    - 'docker push $DOCKER_TAG'
+    - 'docker build -f java.Dockerfile -t $DOCKER_TAG_JAVA .'
+    - 'docker push $DOCKER_TAG_JAVA'
+
+deploy:
+    stage: deploy
+    tags:
+      - shell
+    script: 
+      - "cat marathon-group.json | envsubst | curl -d@- -H \"Content-Type: application/json\" -X PUT http://deploy.alpha.innovation.insee.eu/v2/groups/$GROUP_ID?force=true"
 
