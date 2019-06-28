@@ -5,7 +5,7 @@ variables:
   # Some maven optimisation
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   # The groupe id for marathon
-  GROUP_ID: /coding-dojo_sndio
+  GROUP_ID: /coding-dojo-sndio
   
 stages:
   - test
