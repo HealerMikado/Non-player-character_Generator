@@ -11,9 +11,9 @@
 	<groupId>fr.healermikado</groupId>
 	<artifactId>pnj_generator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<packaging>jar</packaging>
+	<name>pnj_generator</name>
+	<description>A very basic web service to generate non player character for the game Tails of Equestria. Yes it's a little overkill but it's just to play with spring boot :D</description>
 
 	<properties>
 		<java.version>1.8</java.version>
