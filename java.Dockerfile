@@ -1,12 +1,7 @@
-FROM maven:3.6.1-jdk-11-slim AS build
+FROM tomcat:9-jdk11-openjdk
 
-COPY poney-back/src /usr/src/app/src
-COPY poney-back/pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean package
+# Delete existing ROOT folder
+RUN rm -rf /usr/local/tomcat/webapps/ROOT/
 
-FROM openjdk:8-jdk-alpine
-
-COPY --from=build /usr/src/app/target/pnj_generator.jar /usr/app/pnj_generator.jar
-
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/app/is2.jar"]
+# Copy to images tomcat path
+COPY /target/pnj_generator-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war

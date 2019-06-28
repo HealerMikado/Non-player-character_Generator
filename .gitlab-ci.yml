@@ -1,6 +1,7 @@
 variables:
   GIT_SSL_NO_VERIFY: "1"
   DOCKER_TAG: docker-registry.beta.innovation.insee.eu/coding_dojo/pnj_generator_java
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
 stages:
   - test
@@ -17,6 +18,7 @@ buildjava:
   tags:
     - shell
   script:
+    - 'mvn $MAVEN_CLI_OPTS package'
     - 'docker build -f java.Dockerfile -t $DOCKER_TAG .'
     - 'docker push $DOCKER_TAG'
 
