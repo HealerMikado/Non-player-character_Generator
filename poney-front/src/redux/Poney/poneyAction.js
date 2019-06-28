@@ -12,6 +12,12 @@ export const setPony = pony => {
   };
 };
 
+export const updatePony = pony => {
+  return {
+    type: "UPDATE_PONY",
+    pony
+  };
+};
 export const addPony = pony => {
   return {
     type: "ADD_PONY",

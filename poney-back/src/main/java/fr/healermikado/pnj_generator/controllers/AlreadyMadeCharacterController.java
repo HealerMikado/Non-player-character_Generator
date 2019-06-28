@@ -21,7 +21,7 @@ import fr.healermikado.pnj_generator.services.AlreadyMadeCharacterService;
  */
 @RestController
 @RequestMapping(produces = "application/json;charset=UTF-8")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class AlreadyMadeCharacterController {
 
     @Autowired

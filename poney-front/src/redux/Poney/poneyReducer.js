@@ -10,10 +10,10 @@ export const poneyReducer = (state = initialState, action) => {
     }
 
     case "SET_PONY":
-      return {
-        ...state,
-        pony: action.pony
-      };
+      return { ...state, pony: action.pony };
+
+    case "UPDATE_PONY":
+      return { ...state, ...action.pony };
 
     case "ADD_PONY":
       return {

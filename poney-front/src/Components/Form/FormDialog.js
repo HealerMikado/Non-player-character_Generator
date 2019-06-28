@@ -17,19 +17,16 @@ import { bindActionCreators } from "redux";
 import {
   addPony,
   setPony,
-  fetchRandomPony
+  fetchRandomPony,
+  updatePony
 } from "../../redux/Poney/poneyAction";
-import PropTypes from "prop-types";
 
 class FormDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      name: "",
-      level: "",
-      race: "",
-      src: ""
+      poney: { name: "", race: "", level: "", src: "" }
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -43,15 +40,17 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   }
 
-  handleChange = (name, pony) => event => {
-    const { setPony } = this.props;
-    pony[event.target.name] = event.target.value;
-    setPony({ pony });
+  handleChange = name => event => {
+    const { setPony, pony } = this.props;
+    pony[name] = event.target.value;
+    setPony(pony);
+    this.setState({ poney: pony });
   };
   // Recupère un poney random depuis l'api et affecte les valeurs a l'ihm
-  handleRandomClick = pony => {
-    const { fetchRandomPony } = this.props;
+  handleRandomClick = () => {
+    const { fetchRandomPony, pony } = this.props;
     fetchRandomPony();
+    this.setState({ poney: pony });
   };
 
   handleSubmit = pony => {
@@ -66,9 +65,6 @@ class FormDialog extends React.Component {
     };
     addPony(pony);
     this.setState({ open: false });
-  };
-  componentWillUnmount = () => {
-    fetchRandomPony(true);
   };
   render() {
     const { children, classes, pony } = this.props;
@@ -92,7 +88,7 @@ class FormDialog extends React.Component {
               className={classes.margin}
               label="Nom"
               variant="outlined"
-              onChange={this.handleChange("name", pony)}
+              onChange={this.handleChange("name")}
               value={pony.name}
               autoFocus
             />
@@ -100,14 +96,14 @@ class FormDialog extends React.Component {
               className={classes.margin}
               label="Espèce"
               variant="outlined"
-              onChange={this.handleChange("race", pony)}
+              onChange={this.handleChange("race")}
               value={pony.race}
             />
             <CssTextField
               className={classes.margin}
               label="Niveau"
               variant="outlined"
-              onChange={this.handleChange("level", pony)}
+              onChange={this.handleChange("level")}
               value={pony.level}
             />
             <CssTextField
@@ -115,7 +111,7 @@ class FormDialog extends React.Component {
               label="Image"
               variant="outlined"
               helperText="src"
-              onChange={this.handleChange("src", pony)}
+              onChange={this.handleChange("src")}
               value={pony.src}
             />
           </DialogContent>
@@ -213,7 +209,10 @@ const mapStateToProps = ({ poneyReducer }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addPony, setPony, fetchRandomPony }, dispatch);
+  bindActionCreators(
+    { addPony, setPony, fetchRandomPony, updatePony },
+    dispatch
+  );
 
 export default withStyles(styles)(
   connect(
@@ -221,7 +220,3 @@ export default withStyles(styles)(
     mapDispatchToProps
   )(FormDialog)
 );
-
-DialogContent.propTypes = {
-  pony: PropTypes.object.isRequired
-};
