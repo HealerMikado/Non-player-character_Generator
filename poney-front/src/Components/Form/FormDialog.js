@@ -45,6 +45,7 @@ class FormDialog extends React.Component {
   };
 
   // Recupère un poney random depuis l'api et affecte les valeurs a l'ihm
+  // issue rerender
   handleRandomClick = () => {
     const { fetchRandomPony, pony } = this.props;
     fetchRandomPony();
@@ -223,6 +224,9 @@ const mapDispatchToProps = dispatch => {
     },
     fetchRandomPony: () => {
       dispatch(poneyReducer.fetchRandomPony());
+    },
+    addPony: () => {
+      dispatch(poneyReducer.addPony());
     }
   };
 };

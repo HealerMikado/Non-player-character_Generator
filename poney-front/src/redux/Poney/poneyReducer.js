@@ -18,7 +18,7 @@ export const poneyReducer = (state = initialState, action) => {
     case "ADD_PONY":
       return {
         ...state,
-        ponies: [...state.ponies, action.pony]
+        ponies: [...state.ponies, state.pony]
       };
     case "POST_PONIES":
       return {

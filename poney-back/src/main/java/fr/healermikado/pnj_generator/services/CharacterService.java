@@ -76,7 +76,11 @@ public class CharacterService implements ICharacterService {
 		outputCharacter.setQuirks(
 				quirkService.getSomeQuirkEntities(1).stream().map(q -> q.getValue()).collect(Collectors.toSet()));
 		setStatisticLevel(outputCharacter);
+		//set the src
+		outputCharacter.setSrc(race.getImages().get(0).getSrc());
+		logger.debug(String.format("Src of the generate character %s", outputCharacter.getSrc()));
 
+		
 		return outputCharacter;
 	}
 
