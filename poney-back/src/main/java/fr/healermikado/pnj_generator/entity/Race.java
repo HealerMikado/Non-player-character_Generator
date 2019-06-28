@@ -47,15 +47,15 @@ public class Race {
             mappedBy = "id_race")
     private List<RaceImage> images;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "link_race_talent", joinColumns = { @JoinColumn(name = "id_race") }, inverseJoinColumns = {
             @JoinColumn(name = "id_talent") })
     private Set<Talent> specificTalents;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "link_token_race", joinColumns = { @JoinColumn(name = "id_race") }, inverseJoinColumns = {
             @JoinColumn(name = "id_token") })
-    private List<Token> possibleToken;
+    private Set<Token> possibleToken;
 
     @Transient
     private Set<Talent> genericTalents;

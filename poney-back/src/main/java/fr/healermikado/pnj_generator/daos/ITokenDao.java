@@ -1,4 +1,4 @@
-package fr.healermikado.pnj_generator.daos;
+ package fr.healermikado.pnj_generator.daos;
 
 import java.util.List;
 

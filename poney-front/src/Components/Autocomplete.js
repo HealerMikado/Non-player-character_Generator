@@ -127,7 +127,7 @@ class AutoComplete extends React.Component {
     );
   }
 
-  getSuggestions(value) {
+  getSuggestions(value, suggestions) {
     const inputValue = deburr(value.trim()).toLowerCase();
     const inputLength = inputValue.length;
     let count = 0;

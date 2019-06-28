@@ -7,19 +7,16 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  TextField
+  TextField,
+  MenuItem
 } from "@material-ui/core/";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import withStyles from "@material-ui/styles/withStyles";
 import theme from "../../Theme";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import {
-  addPony,
-  setPony,
-  fetchRandomPony,
-  updatePony
-} from "../../redux/Poney/poneyAction";
+import PropTypes from "prop-types";
+import * as poneyReducer from "../../redux/Poney/index";
+import * as raceReducer from "../../redux/Races/index";
 
 class FormDialog extends React.Component {
   constructor(props) {
@@ -46,6 +43,7 @@ class FormDialog extends React.Component {
     setPony(pony);
     this.setState({ poney: pony });
   };
+
   // Recupère un poney random depuis l'api et affecte les valeurs a l'ihm
   handleRandomClick = () => {
     const { fetchRandomPony, pony } = this.props;
@@ -67,7 +65,7 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   };
   render() {
-    const { children, classes, pony } = this.props;
+    const { children, classes, pony, races } = this.props;
     return (
       <React.Fragment>
         {React.cloneElement(children, { onClick: this.handleClickOpen })}
@@ -89,22 +87,36 @@ class FormDialog extends React.Component {
               label="Nom"
               variant="outlined"
               onChange={this.handleChange("name")}
-              value={pony.name}
+              value={this.state.poney.name}
               autoFocus
             />
             <CssTextField
+              id="Espèces"
               className={classes.margin}
               label="Espèce"
               variant="outlined"
+              select
+              value={this.state.poney.race}
               onChange={this.handleChange("race")}
-              value={pony.race}
-            />
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu
+                }
+              }}
+              margin="normal"
+            >
+              {races.map(option => (
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </CssTextField>
             <CssTextField
               className={classes.margin}
               label="Niveau"
               variant="outlined"
               onChange={this.handleChange("level")}
-              value={pony.level}
+              value={this.state.poney.level}
             />
             <CssTextField
               className={classes.margin}
@@ -112,7 +124,7 @@ class FormDialog extends React.Component {
               variant="outlined"
               helperText="src"
               onChange={this.handleChange("src")}
-              value={pony.src}
+              value={this.state.poney.src}
             />
           </DialogContent>
           <DialogActions>
@@ -129,8 +141,7 @@ class FormDialog extends React.Component {
             {
               //Pareil
             }
-            {pony.src !== undefined &&
-            pony.race !== undefined &&
+            {pony.race !== undefined &&
             pony.name !== undefined &&
             pony.level !== undefined ? (
               <Tooltip title="Ajouter un nouveau poney ">
@@ -175,7 +186,11 @@ const styles = {
     float: "right"
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: 200
+  },
+  menu: {
+    width: 200
   }
 };
 
@@ -201,18 +216,24 @@ const CssTextField = withStyles({
   }
 })(TextField);
 
-const mapStateToProps = ({ poneyReducer }) => {
+const mapDispatchToProps = dispatch => {
   return {
-    ponies: poneyReducer.ponies,
-    pony: poneyReducer.pony
+    setPony: pony => {
+      dispatch(poneyReducer.setPony(pony));
+    },
+    fetchRandomPony: () => {
+      dispatch(poneyReducer.fetchRandomPony());
+    }
   };
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    { addPony, setPony, fetchRandomPony, updatePony },
-    dispatch
-  );
+const mapStateToProps = state => {
+  return {
+    ponies: state.poneyReducer.ponies,
+    races: state.raceReducer.races,
+    pony: state.poneyReducer.pony
+  };
+};
 
 export default withStyles(styles)(
   connect(

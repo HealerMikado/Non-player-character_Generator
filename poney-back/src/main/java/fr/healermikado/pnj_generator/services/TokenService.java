@@ -1,6 +1,9 @@
 package fr.healermikado.pnj_generator.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +18,7 @@ import fr.healermikado.pnj_generator.entity.Token;
 @Service
 public class TokenService {
     
-    public String generateRandomName(List<Token> tokens){
+    public String generateRandomName(Set<Token> tokens){
 
 
         String firstName = getRandomToken(tokens);
@@ -25,7 +28,10 @@ public class TokenService {
         return firstName + " " + lastName;
     }
 
-    private String getRandomToken(List<Token> tokens) {
-        return  tokens.get(ThreadLocalRandom.current().nextInt(tokens.size())).getToken();
+    private String getRandomToken(Set<Token> tokens) {
+    	List<Token> tokenList = new ArrayList<>();
+    	tokenList.addAll(tokens);
+    	Collections.shuffle(tokenList);
+        return  tokenList.get(0).getToken();
     }
 }

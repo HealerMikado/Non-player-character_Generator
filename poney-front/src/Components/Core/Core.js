@@ -159,16 +159,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    ponies: state.poneyReducer.ponies,
-    races: state.raceReducer.races
-  };
-};
-
 export default withStyles(styles)(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )(Core)
 );
