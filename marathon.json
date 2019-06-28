@@ -1,5 +1,5 @@
 {
-  "id": "${GROUP_ID}/back",
+  "id": "${APP_ID}",
   "cmd": null,
   "cpus": 1,
   "mem": 512,
