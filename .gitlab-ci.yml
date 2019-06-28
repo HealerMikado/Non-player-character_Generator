@@ -5,7 +5,7 @@ variables:
   # Some maven optimisation
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   # The groupe id for marathon
-  APP_ID: /coding-dojo-sndio/back
+  GROUP_ID: /coding-dojo-sndio
   
 stages:
   - test
@@ -33,5 +33,5 @@ deploy:
     tags:
       - shell
     script: 
-      - "cat marathon.json | envsubst | curl -d@- -H \"Content-Type: application/json\" -X PUT http://deploy.alpha.innovation.insee.eu/v2/apps/$APP_ID?force=true"
+      - "cat marathon-group.json | envsubst | curl -d@- -H \"Content-Type: application/json\" -X PUT http://deploy.alpha.innovation.insee.eu/v2/groups/$GROUP_ID?force=true"
 
