@@ -28,6 +28,7 @@ class FormDialog extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+
   handleClickOpen() {
     this.setState({ open: true });
   }
@@ -67,7 +68,7 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   };
   render() {
-    const { children, classes, pony, races } = this.props;
+    const { children, classes, pony, races} = this.props;
 
     return (
       <React.Fragment>

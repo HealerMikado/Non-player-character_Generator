@@ -28,9 +28,10 @@ class Core extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchPonies, fetchRaces } = this.props;
+    const { fetchPonies, fetchRaces,fetchRandomPony } = this.props;
     fetchPonies();
     fetchRaces();
+    fetchRandomPony();
   }
   componentWillUnmount() {
     const { setPonies } = this.props;
@@ -155,6 +156,9 @@ const mapDispatchToProps = dispatch => {
     },
     fetchRaces: () => {
       dispatch(raceReducer.fetchRaces());
+    },
+    fetchRandomPony: () => {
+      dispatch(poneyReducer.fetchRandomPony());
     }
   };
 };
