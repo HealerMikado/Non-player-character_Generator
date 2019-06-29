@@ -14,7 +14,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import withStyles from "@material-ui/styles/withStyles";
 import theme from "../../Theme";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import * as poneyReducer from "../../redux/Poney/index";
 import * as raceReducer from "../../redux/Races/index";
 
@@ -52,21 +51,24 @@ class FormDialog extends React.Component {
     this.setState({ poney: pony });
   };
 
-  handleSubmit = pony => {
-    const { fetchRandomPony, addPony } = this.props;
-    fetchRandomPony(false);
-    pony = {
+  handleSubmit = () => {
+    const { postPony, pony, setPony} = this.props;
+    const {poney}=this.state;
+    const pon = {
       ...pony,
-      name: this.state.name,
-      race: this.state.race,
-      level: this.state.level,
-      src: this.state.src
+      name: poney.name,
+      race: poney.race,
+      level: poney.level,
+      src: poney.src
     };
-    addPony(pony);
+    console.log(pon);
+    setPony(pon)
+    postPony(pon);
     this.setState({ open: false });
   };
   render() {
     const { children, classes, pony, races } = this.props;
+
     return (
       <React.Fragment>
         {React.cloneElement(children, { onClick: this.handleClickOpen })}
@@ -225,8 +227,8 @@ const mapDispatchToProps = dispatch => {
     fetchRandomPony: () => {
       dispatch(poneyReducer.fetchRandomPony());
     },
-    addPony: () => {
-      dispatch(poneyReducer.addPony());
+    postPony: (pony) => {
+      dispatch(poneyReducer.postPony(pony));
     }
   };
 };

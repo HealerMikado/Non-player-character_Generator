@@ -37,7 +37,7 @@ export const fetchPonies = (isChargement = false) => (dispatch, getState) => {
 
 export const fetchPonyById = name => {
   return dispatch => {
-    fetch(`{http://localhost:8080/characters/${name}}`)
+    fetch(`http://localhost:8080/characters/${name}`)
       .then(response => response.json())
       .then(result => {
         dispatch(setPony(result));
@@ -45,25 +45,18 @@ export const fetchPonyById = name => {
   };
 };
 
-export const postPony = pony => {
-  return (dispatch, getState) => {
+export const postPony = (pony) => {
+  return (dispatch,getState) => {
     fetch(
-      "http://localhost:8080/creation",
-      this.state.pony,
-      {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+      "http://localhost:8080/creation",{      
+        method: "POST",
         headers: {
           "Content-Type": "application/json"
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(setPony)
-      }.then(response => response.json())
-    );
+        body: JSON.stringify(pony)
+      }).then(
+        dispatch(addPony(pony))
+      );
   };
 };
 
