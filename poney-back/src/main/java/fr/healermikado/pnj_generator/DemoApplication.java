@@ -54,12 +54,23 @@ public class DemoApplication {
 				, new Level(3L, "D8")//
 				, ""//
 				, new HashSet<>());
-
+		
+		CharacterDto characterDto3 = new CharacterDto("Prince Rutherford"//
+				, "Yakyak"//
+				, 3//
+				, new HashMap<>()//
+				, null//
+				, null//
+				, null//
+				, ""// 
+				, new HashSet<>());
+		
 		CharacterEntity character = characterService.generateCharacterFromDto(characterDto);
 
 		logger.info("Save a new pony");
 		iCharacterDao.save(character);
 		iCharacterDao.save(characterService.generateCharacterFromDto(characterDto2));
+		iCharacterDao.save(characterService.generateCharacterFromDto(characterDto3));
 	}
 
 }

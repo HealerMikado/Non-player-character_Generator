@@ -4,7 +4,7 @@ import PoneyCard from "../PoneyCard";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
-class PoneyGrid extends Component {
+class PoneyGrid extends Component {  
   render() {
     const { classes, ponies } = this.props;
     return (

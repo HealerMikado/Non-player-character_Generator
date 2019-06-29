@@ -116,7 +116,7 @@ public class CharacterService implements ICharacterService {
 			Collections.shuffle(theCharacterToReturn.getRace().getImages());
 			theCharacterToReturn.setSrc(theCharacterToReturn.getRace().getImages().get(0).getSrc());
 		} else {
-			characterDto.getSrc();
+			theCharacterToReturn.setSrc(characterDto.getSrc());
 		}
 
 		logger.debug(String.format("Src of the generate character %s", theCharacterToReturn.getSrc()));

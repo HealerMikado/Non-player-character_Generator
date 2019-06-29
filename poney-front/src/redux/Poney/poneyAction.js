@@ -46,7 +46,8 @@ export const fetchPonyById = name => {
 };
 
 export const postPony = (pony) => {
-  return (dispatch,getState) => {
+  console.log(pony);
+  return (dispatch) => {
     fetch(
       "http://localhost:8080/creation",{      
         method: "POST",
