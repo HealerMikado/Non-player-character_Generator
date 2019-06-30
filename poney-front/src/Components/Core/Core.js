@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import * as poneyReducer from "../../redux/Poney/index";
 import * as raceReducer from "../../redux/Races/index";
 import FormDialog from "../Form/FormDialog";
+import Recherche from "./Recherche"
 class Core extends React.Component {
   constructor(props) {
     super(props);
@@ -56,25 +57,18 @@ class Core extends React.Component {
         </Tooltip>
         <Paper className={classes.paper}>
           <h1 className={classes.h1}>Ecurie</h1>
+          <div>
           <FormDialog handleClick={this.handleSubmit()}>
             <Fab variant="extended" aria-label="Add" className={classes.fab}>
               <Add className={classes.extendedIcon} />
               &nbsp; Ajouter un nouveau poney
             </Fab>
           </FormDialog>
+            <Recherche className={classes.fab2}/>
 
-          <Fab variant="extended" className={classes.fab2} disableRipple={true}>
-            <Search className={classes.extendedIcon} />
-            <InputBase
-              placeholder="Recherchez votre poney"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "Search" }}
-            />
-          </Fab>
+            </div>
           <PoneyGrid checked={ToggleOn} />
+
         </Paper>
       </Container>
     );
@@ -109,6 +103,7 @@ const styles = {
     padding: "0 30px"
   },
   fab2: {
+    position: "relative",
     marginBottom: "57px",
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     border: 0,
@@ -116,8 +111,8 @@ const styles = {
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "black",
     height: 48,
-    padding: "0 30px",
-    float: "right"
+    float: "right",
+    bottom: "100px"
   },
   fab3: {
     marginBottom: "57px",

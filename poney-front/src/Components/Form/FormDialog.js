@@ -27,7 +27,9 @@ class FormDialog extends React.Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
-
+  componentDidMount(){
+    this.initPony();
+  }
 
   handleClickOpen() {
     this.setState({ open: true });
@@ -67,9 +69,22 @@ class FormDialog extends React.Component {
     postPony(pon);
     this.setState({ open: false });
   };
+  initPony(){
+    debugger;
+    const {pony,setPony} =this.props;
+    const pon = {
+      ...pony,
+      name: undefined,
+      race: undefined,
+      level: undefined,
+      src: undefined
+    };
+    console.log(pon);
+    setPony(pon);
+    debugger;
+  }
   render() {
     const { children, classes, pony, races} = this.props;
-
     return (
       <React.Fragment>
         {React.cloneElement(children, { onClick: this.handleClickOpen })}
