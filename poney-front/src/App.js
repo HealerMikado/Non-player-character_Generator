@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Header from "./Components/Header";
 import Menu from "./Components/Menu";
 import Core from "./Components/Core/Core";

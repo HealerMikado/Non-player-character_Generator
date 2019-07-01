@@ -10,27 +10,15 @@ import Popper from "@material-ui/core/Popper";
 import Search from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
+import {setPonies} from "../../redux/Poney/poneyAction"
+import store from "../../redux/store"
 
-const suggestions = {
-    url: 'https://trial.mobiscroll.com/airports/',
-    remoteFilter: true,
-    dataType: 'jsonp',
-    processResponse: function (data) {
-        let ret = [];
-
-        if (data) {
-            for (let i = 0; i < data.length; i++) {
-                const item = data[i];
-                ret.push({
-                    value: item.code,
-                    text: item.name,
-                    html: '<div style="font-size:16px;line-height:18px;">' + item.name + '</div><div style="font-size:10px;line-height:12px;">' + item.location + ', ' + item.code + '</div>'
-                });
-            }
-        }
-
-        return ret;
-    }
+const suggestions = () =>  {
+    fetch('localhost:8080/characters')
+      .then(response => response.json())
+      .then(result => {
+        store.dispatch(setPonies(result));
+      });
 }
 
 function renderInputComponent(inputProps) {
@@ -91,7 +79,6 @@ function getSuggestions(value) {
         if (keep) {
           count += 1;
         }
-
         return keep;
       });
 }

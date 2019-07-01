@@ -2,6 +2,7 @@
   "name": "formation",
   "version": "0.1.0",
   "private": true,
+  "main": "app.js",
   "dependencies": {
     "@material-ui/core": "^4.1.2",
     "@material-ui/icons": "^4.2.1",
