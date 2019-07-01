@@ -27,9 +27,9 @@ export const addPony = pony => {
   };
 };
 
-export  const fetchPonies =  (isChargement = false) => async (dispatch, getState) => {
+export  const fetchPonies =  (isChargement = false) =>  (dispatch, getState) => {
   if (isChargement || getState().poneyReducer.ponies.length === 0) {
-    fetch(`${await getApiUrl()}/characters`)
+    fetch(`${ getApiUrl()}/characters`)
       .then(response => response.json())
       .then(result => {
         dispatch(setPonies(result))
@@ -38,8 +38,8 @@ export  const fetchPonies =  (isChargement = false) => async (dispatch, getState
 };
 
 export const fetchPonyById = name => {
-  return async  dispatch =>  {
-    fetch(`${await getApiUrl()}/characters/${name}`)
+  return   dispatch =>  {
+    fetch(`${ getApiUrl()}/characters/${name}`)
       .then(response => response.json())
       .then(result => {
         dispatch(setPony(result));
@@ -49,9 +49,9 @@ export const fetchPonyById = name => {
 
 export const postPony = (pony) => {
   console.log(pony);
-  return async (dispatch) =>  {
+  return  (dispatch) =>  {
     fetch(
-      `${await getApiUrl()}/creation`, {
+      `${ getApiUrl()}/creation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -64,9 +64,9 @@ export const postPony = (pony) => {
 };
 
 export const fetchRandomPony = (isChargement = true) => {
-  return async (dispatch, getState) => {
+  return  (dispatch, getState) => {
     if (isChargement || getState().poneyReducer.pony.mindLevel.length === 0) {
-      fetch(`${await getApiUrl()}/generate`)
+      fetch(`${ getApiUrl()}/generate`)
         .then(response => response.json())
         .then(result => {
           dispatch(setPony(result));

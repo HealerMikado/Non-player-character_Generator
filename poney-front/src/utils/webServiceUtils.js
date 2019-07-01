@@ -1,9 +1,5 @@
-import getConfiguration from "./configuration";
-
-const getApiUrl = async () => {
-  const serveurName = await getConfiguration("api");
-  console.log(serveurName);
-  return serveurName;
+const getApiUrl = () => {
+  return process.env.REACT_APP_API_URL;
 }
 
 export default getApiUrl;

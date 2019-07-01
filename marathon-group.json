@@ -58,6 +58,58 @@
       ],
       "portDefinitions": [],
       "maxLaunchDelaySeconds": 300
+    },
+    {
+      "id": "front",
+      "instances": 1,
+      "cpus": 0.1,
+      "mem": 1024,
+      "disk": 0,
+      "gpus": 0,
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "docker-registry.beta.innovation.insee.eu/coding_dojo/pnj_generator_java_front",
+          "network": "BRIDGE",
+          "portMappings": [
+            {
+              "containerPort": 3000,
+              "hostPort": 0,
+              "protocol": "tcp",
+              "name": "default"
+            }
+          ],
+          "privileged": false,
+          "forcePullImage": true
+        }
+      },
+      "healthChecks": [
+        {
+          "gracePeriodSeconds": 300,
+          "intervalSeconds": 60,
+          "maxConsecutiveFailures": 3,
+          "portIndex": 0,
+          "protocol": "MESOS_TCP",
+          "ipProtocol": "IPv4",
+          "timeoutSeconds": 20,
+          "delaySeconds": 15
+        }
+      ],
+      "labels": {
+        "HAPROXY_GROUP": "external",
+        "HAPROXY_0_VHOST": "front-pnj-generator.dev.innovation.insee.eu",
+        "HAPROXY_0_REDIRECT_TO_HTTPS": "true",
+        "HAPROXY_0_FRONTEND_HEAD": "",
+        "HAPROXY_0_FRONTEND_BACKEND_GLUE": "",
+        "HAPROXY_0_ENABLED": "true"
+      },
+        "constraints": [
+            [
+              "type",
+              "IS",
+              "boss"
+            ]
+          ]
     }
   ]
 }

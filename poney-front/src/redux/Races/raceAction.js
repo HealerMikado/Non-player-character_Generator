@@ -7,9 +7,9 @@ export const setRaces = races => {
   };
 };
 
-export const fetchRaces = () => async (dispatch, getState) => {
+export const fetchRaces = () => (dispatch, getState) => {
   if (getState().raceReducer.races.length === 0) {
-    return fetch(`${await getApiUrl()}/races`)
+    return fetch(`${ getApiUrl()}/races`)
       .then(response => response.json())
       .then(result => {
         dispatch(
