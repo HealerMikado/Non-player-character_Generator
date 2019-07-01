@@ -1,10 +1,9 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import SearchIcon from "@material-ui/icons/Search";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -59,7 +58,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Menu() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
   return (
     <div className={classes.root}>

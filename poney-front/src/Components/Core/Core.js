@@ -4,8 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/";
 import Fab from "@material-ui/core/Fab";
 import Add from "@material-ui/icons/Add";
-import Search from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 import PoneyGrid from "./PoneyGrid";
