@@ -1,3 +1,5 @@
+import getApiUrl from "../../utils/webServiceUtils";
+
 export const setRaces = races => {
   return {
     type: "SET_RACE",
@@ -7,7 +9,7 @@ export const setRaces = races => {
 
 export const fetchRaces = () => (dispatch, getState) => {
   if (getState().raceReducer.races.length === 0) {
-    return fetch("http://localhost:8080/races")
+    return fetch(`${ getApiUrl()}/races`)
       .then(response => response.json())
       .then(result => {
         dispatch(

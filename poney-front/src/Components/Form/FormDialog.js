@@ -15,7 +15,6 @@ import withStyles from "@material-ui/styles/withStyles";
 import theme from "../../Theme";
 import { connect } from "react-redux";
 import * as poneyReducer from "../../redux/Poney/index";
-import * as raceReducer from "../../redux/Races/index";
 
 class FormDialog extends React.Component {
   constructor(props) {

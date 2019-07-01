@@ -22,7 +22,7 @@ class ListQuirks extends React.Component {
           <ListItem >
             <ListItemAvatar>
               <Avatar>
-              <img src="https://img.icons8.com/color/40/000000/drama.png"/>
+              <img src="https://img.icons8.com/color/40/000000/drama.png" alt="quirk"/>
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={quirk  }/>
