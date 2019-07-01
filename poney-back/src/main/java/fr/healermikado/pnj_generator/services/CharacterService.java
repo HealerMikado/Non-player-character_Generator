@@ -110,7 +110,6 @@ public class CharacterService implements ICharacterService {
 		logger.debug(String.format("Name of the generate character %s", theCharacterToReturn.getName()));
 
 		theCharacterToReturn.setLevel(characterDto.getLevel() > 0 ? characterDto.getLevel() : 1);
-
 		// If no src get an image from the db
 		if (StringUtils.isEmpty(characterDto.getSrc())) {
 			Collections.shuffle(theCharacterToReturn.getRace().getImages());

@@ -67,7 +67,6 @@ public class CharacterDto {
 
     public CharacterDto(CharacterEntity alreadyMadeEntity) {
 
-        
         this.name = alreadyMadeEntity.getName();
         this.level = alreadyMadeEntity.getLevel();
         this.race = alreadyMadeEntity.getRace().getName();
