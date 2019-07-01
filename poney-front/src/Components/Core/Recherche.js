@@ -10,12 +10,14 @@ import Popper from "@material-ui/core/Popper";
 import Search from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
+import {setPonies} from "../../redux/Poney/poneyAction"
+import store from "../../redux/store"
 
-const suggestions = {
-    fetch("*/characters")
+const suggestions = () =>  {
+    fetch('*/characters')
       .then(response => response.json())
       .then(result => {
-        dispatch(setPonies(result));
+        store.dispatch(setPonies(result));
       });
 }
 
