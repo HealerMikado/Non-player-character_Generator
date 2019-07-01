@@ -12,11 +12,25 @@ import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 
 const suggestions = {
-    fetch("*/characters")
-      .then(response => response.json())
-      .then(result => {
-        dispatch(setPonies(result));
-      });
+    url: 'https://trial.mobiscroll.com/airports/',
+    remoteFilter: true,
+    dataType: 'jsonp',
+    processResponse: function (data) {
+        let ret = [];
+
+        if (data) {
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i];
+                ret.push({
+                    value: item.code,
+                    text: item.name,
+                    html: '<div style="font-size:16px;line-height:18px;">' + item.name + '</div><div style="font-size:10px;line-height:12px;">' + item.location + ', ' + item.code + '</div>'
+                });
+            }
+        }
+
+        return ret;
+    }
 }
 
 function renderInputComponent(inputProps) {

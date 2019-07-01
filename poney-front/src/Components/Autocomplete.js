@@ -57,6 +57,9 @@ function renderInputComponent(inputProps) {
           ref(node);
           inputRef(node);
         },
+        classes: {
+          input: classes.input,
+        },
       }}
       {...other}
     />
@@ -144,6 +147,8 @@ export default function AutoComplete() {
           id: 'react-autosuggest-simple',
           label: 'Country',
           placeholder: 'Search a country (start with a)',
+          value: state.single,
+          onChange: handleChange('single'),
         }}
         renderSuggestionsContainer={options => (
           <Paper {...options.containerProps} square>

@@ -4,8 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/";
 import Fab from "@material-ui/core/Fab";
 import Add from "@material-ui/icons/Add";
-import Search from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 import PoneyGrid from "./PoneyGrid";
@@ -27,12 +25,27 @@ class Core extends React.Component {
   handleClick() {
     this.setState({ isToggleOn: this.state.isToggleOn === false });
   }
+  fixPony(){
+    const {pony,setPony} =this.props;
+    console.log(pony);
+    const pon = {
+      ...pony,
+      name: undefined,
+      race: undefined,
+      level: undefined,
+      src: undefined
+    };
+    console.log(pon);
+    setPony(pon);
+    debugger
+  }
 
   componentDidMount() {
-    const { fetchPonies, fetchRaces,fetchRandomPony } = this.props;
+    const { fetchPonies, fetchRaces } = this.props;
     fetchPonies();
     fetchRaces();
-    fetchRandomPony();
+
+    
   }
   componentWillUnmount() {
     const { setPonies } = this.props;
@@ -42,7 +55,7 @@ class Core extends React.Component {
   handleSubmit() {}
 
   render() {
-    const { classes } = this.props;
+    const { classes} = this.props;
     const { ToggleOn } = this.state;
     return (
       <Container>
@@ -154,9 +167,14 @@ const mapDispatchToProps = dispatch => {
     },
     fetchRandomPony: () => {
       dispatch(poneyReducer.fetchRandomPony());
+    },
+    setPony: pony => {
+      dispatch(poneyReducer.setPony(pony))
     }
   };
 };
+
+
 
 export default withStyles(styles)(
   connect(

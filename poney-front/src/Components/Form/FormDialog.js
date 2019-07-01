@@ -33,6 +33,7 @@ class FormDialog extends React.Component {
 
   handleClickOpen() {
     this.setState({ open: true });
+    this.fixPony();
   }
 
   handleClose() {
@@ -54,6 +55,22 @@ class FormDialog extends React.Component {
     this.setState({ poney: pony });
   };
 
+  fixPony(){
+    const {pony,setPony} =this.props;
+    console.log(pony);
+    const pon = {
+      ...pony,
+      name: undefined,
+      race: undefined,
+      level: undefined,
+      src: undefined
+    };
+    console.log(pon);
+    setPony(pon);
+    debugger
+  }
+
+
   handleSubmit = () => {
     const { postPony, pony, setPony} = this.props;
     const {poney}=this.state;
@@ -70,19 +87,10 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   };
   initPony(){
-    debugger;
-    const {pony,setPony} =this.props;
-    const pon = {
-      ...pony,
-      name: undefined,
-      race: undefined,
-      level: undefined,
-      src: undefined
-    };
-    console.log(pon);
-    setPony(pon);
-    debugger;
+    const {fetchRandomPony}=this.props;
+    fetchRandomPony();
   }
+
   render() {
     const { children, classes, pony, races} = this.props;
     return (

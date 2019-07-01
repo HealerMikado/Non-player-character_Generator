@@ -11,7 +11,7 @@ class PoneyGrid extends Component {
       <React.Fragment>
         <Grid container spacing={6}>
           <Grid item xs={12} className={classes.gridItem}>
-            {ponies.map((pony, i) => (
+            {ponies.map((pony) => (
               <PoneyCard className={classes.PoneyCard} pony={pony} />
             ))}
           </Grid>
