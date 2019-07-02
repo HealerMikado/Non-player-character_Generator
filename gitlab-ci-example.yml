@@ -27,7 +27,7 @@ helloworld:
 
 packagejs:
   stage: build
-    tags:
+  tags:
     - shell
  ## Si aucune image n'est précisée dans le dockerfile, on peut également la préciser ici
   script:
@@ -37,7 +37,7 @@ packagejs:
 
 packageJava:
   stage: build
-    tags:
+  tags:
     - shell
   script:
  ## Si aucune image n'est précisée dans le dockerfile, on peut également la préciser ici
