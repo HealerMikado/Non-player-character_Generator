@@ -1,5 +1,5 @@
 #example
-
+variable:
   GIT_SSL_NO_VERIFY: "1"
   # This will supress any download for dependencies and plugins or upload messages which would clutter the console log.
   # `showDateTime` will show the passed time in milliseconds. You need to specify `--batch-mode` to make this work.
@@ -27,7 +27,7 @@ helloworld:
 
 packagejs:
   stage: build
-    tags:
+  tags:
     - shell
  ## Si aucune image n'est précisée dans le dockerfile, on peut également la préciser ici
   script:
@@ -37,7 +37,7 @@ packagejs:
 
 packageJava:
   stage: build
-    tags:
+  tags:
     - shell
   script:
  ## Si aucune image n'est précisée dans le dockerfile, on peut également la préciser ici
