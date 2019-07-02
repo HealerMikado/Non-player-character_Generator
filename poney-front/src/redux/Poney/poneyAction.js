@@ -52,6 +52,7 @@ export const postPony = pony => {
   return dispatch => {
     fetch(`${getApiUrl()}/creation`, {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
