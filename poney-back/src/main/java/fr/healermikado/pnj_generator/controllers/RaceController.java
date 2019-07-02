@@ -18,7 +18,6 @@ import fr.healermikado.pnj_generator.services.RaceService;
  * RaceController
  */
 @RestController
-@CrossOrigin(origins = "*")
 public class RaceController {
 
     @Autowired
