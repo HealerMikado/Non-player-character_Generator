@@ -73,7 +73,7 @@
           "network": "BRIDGE",
           "portMappings": [
             {
-              "containerPort": 3000,
+              "containerPort": 80,
               "hostPort": 0,
               "protocol": "tcp",
               "name": "default"
@@ -85,31 +85,26 @@
       },
       "healthChecks": [
         {
-          "gracePeriodSeconds": 300,
-          "intervalSeconds": 60,
+          "gracePeriodSeconds": 120,
+          "intervalSeconds": 30,
+          "timeoutSeconds": 5,
           "maxConsecutiveFailures": 3,
           "portIndex": 0,
-          "protocol": "MESOS_TCP",
-          "ipProtocol": "IPv4",
-          "timeoutSeconds": 20,
-          "delaySeconds": 15
+          "protocol": "MESOS_TCP"
         }
       ],
       "labels": {
         "HAPROXY_GROUP": "external",
         "HAPROXY_0_VHOST": "front-pnj-generator.dev.innovation.insee.eu",
-        "HAPROXY_0_REDIRECT_TO_HTTPS": "true",
-        "HAPROXY_0_FRONTEND_HEAD": "",
-        "HAPROXY_0_FRONTEND_BACKEND_GLUE": "",
         "HAPROXY_0_ENABLED": "true"
       },
-        "constraints": [
-            [
-              "type",
-              "IS",
-              "boss"
-            ]
-          ]
+      "constraints": [
+        [
+          "type",
+          "IS",
+          "boss"
+        ]
+      ]
     }
   ]
 }
