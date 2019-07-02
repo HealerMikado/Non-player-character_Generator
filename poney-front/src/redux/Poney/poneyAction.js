@@ -64,7 +64,10 @@ export const postPony = pony => {
 export const fetchRandomPony = (isChargement = true) => {
   return (dispatch, getState) => {
     if (isChargement || getState().poneyReducer.pony.mindLevel.length === 0) {
-      fetch(`${getApiUrl()}/generate`)
+      fetch(`${getApiUrl()}/generate`, {
+        methode : "GET",
+        mode : "cors"
+      })
         .then(response => response.json())
         .then(result => {
           dispatch(setPony(result));
