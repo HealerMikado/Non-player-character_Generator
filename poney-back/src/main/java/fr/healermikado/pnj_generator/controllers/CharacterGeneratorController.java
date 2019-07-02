@@ -24,6 +24,7 @@ import fr.healermikado.pnj_generator.services.CharacterService;
  */
 @RestController
 @RequestMapping(produces = "application/json;charset=UTF-8")
+@CrossOrigin
 public class CharacterGeneratorController {
 	private Logger logger = LoggerFactory.getLogger(CharacterGeneratorController.class);
 
