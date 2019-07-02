@@ -26,12 +26,15 @@ class FormDialog extends React.Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
-  componentDidMount(){
+  componentDidMount() {
     this.initPony();
   }
 
   handleClickOpen() {
-    this.setState({ open: true });
+    this.setState({
+      open: true,
+      poney: { name: "", race: "", level: "", src: "" }
+    });
     this.fixPony();
   }
 
@@ -54,8 +57,8 @@ class FormDialog extends React.Component {
     this.setState({ poney: pony });
   };
 
-  fixPony(){
-    const {pony,setPony} =this.props;
+  fixPony() {
+    const { pony, setPony } = this.props;
     console.log(pony);
     const pon = {
       ...pony,
@@ -66,13 +69,12 @@ class FormDialog extends React.Component {
     };
     console.log(pon);
     setPony(pon);
-    debugger
+    debugger;
   }
 
-
   handleSubmit = () => {
-    const { postPony, pony, setPony} = this.props;
-    const {poney}=this.state;
+    const { postPony, pony, setPony } = this.props;
+    const { poney } = this.state;
     const pon = {
       ...pony,
       name: poney.name,
@@ -81,17 +83,17 @@ class FormDialog extends React.Component {
       src: poney.src
     };
     console.log(pon);
-    setPony(pon)
+    setPony(pon);
     postPony(pon);
     this.setState({ open: false });
   };
-  initPony(){
-    const {fetchRandomPony}=this.props;
+  initPony() {
+    const { fetchRandomPony } = this.props;
     fetchRandomPony();
   }
 
   render() {
-    const { children, classes, pony, races} = this.props;
+    const { children, classes, pony, races } = this.props;
     return (
       <React.Fragment>
         {React.cloneElement(children, { onClick: this.handleClickOpen })}
@@ -250,7 +252,7 @@ const mapDispatchToProps = dispatch => {
     fetchRandomPony: () => {
       dispatch(poneyReducer.fetchRandomPony());
     },
-    postPony: (pony) => {
+    postPony: pony => {
       dispatch(poneyReducer.postPony(pony));
     }
   };
