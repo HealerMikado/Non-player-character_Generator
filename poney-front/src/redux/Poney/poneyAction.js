@@ -66,7 +66,7 @@ export const fetchRandomPony = (isChargement = true) => {
     if (isChargement || getState().poneyReducer.pony.mindLevel.length === 0) {
       fetch(`${getApiUrl()}/generate`, {
         methode : "GET",
-        mode : "cors"
+        mode : "no-cors"
       })
         .then(response => response.json())
         .then(result => {
