@@ -18,7 +18,7 @@ import fr.healermikado.pnj_generator.services.RaceService;
  * RaceController
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class RaceController {
 
     @Autowired
