@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import * as poneyReducer from "../../redux/Poney/index";
 import * as raceReducer from "../../redux/Races/index";
 import FormDialog from "../Form/FormDialog";
-import Recherche from "./Recherche"
+import Recherche from "./Recherche";
 class Core extends React.Component {
   constructor(props) {
     super(props);
@@ -25,8 +25,8 @@ class Core extends React.Component {
   handleClick() {
     this.setState({ isToggleOn: this.state.isToggleOn === false });
   }
-  fixPony(){
-    const {pony,setPony} =this.props;
+  fixPony() {
+    const { pony, setPony } = this.props;
     console.log(pony);
     const pon = {
       ...pony,
@@ -37,15 +37,13 @@ class Core extends React.Component {
     };
     console.log(pon);
     setPony(pon);
-    debugger
+    debugger;
   }
 
   componentDidMount() {
     const { fetchPonies, fetchRaces } = this.props;
     fetchPonies();
     fetchRaces();
-
-    
   }
   componentWillUnmount() {
     const { setPonies } = this.props;
@@ -55,11 +53,11 @@ class Core extends React.Component {
   handleSubmit() {}
 
   render() {
-    const { classes} = this.props;
+    const { classes } = this.props;
     const { ToggleOn } = this.state;
     return (
       <Container>
-        <Tooltip title="Activer la suppression">
+        {/* <Tooltip title="Activer la suppression">
           <Switch
             className={classes.Switch}
             checked={ToggleOn}
@@ -67,21 +65,19 @@ class Core extends React.Component {
             value="checked"
             inputProps={{ "aria-label": "suppression" }}
           />
-        </Tooltip>
+        </Tooltip> */}
         <Paper className={classes.paper}>
           <h1 className={classes.h1}>Ecurie</h1>
           <div>
-          <FormDialog handleClick={this.handleSubmit()}>
-            <Fab variant="extended" aria-label="Add" className={classes.fab}>
-              <Add className={classes.extendedIcon} />
-              &nbsp; Ajouter un nouveau poney
-            </Fab>
-          </FormDialog>
-            <Recherche className={classes.fab2}/>
-
-            </div>
+            <FormDialog handleClick={this.handleSubmit()}>
+              <Fab variant="extended" aria-label="Add" className={classes.fab}>
+                <Add className={classes.extendedIcon} />
+                &nbsp; Ajouter un nouveau poney
+              </Fab>
+            </FormDialog>
+            <Recherche className={classes.fab2} />
+          </div>
           <PoneyGrid checked={ToggleOn} />
-
         </Paper>
       </Container>
     );
@@ -169,12 +165,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(poneyReducer.fetchRandomPony());
     },
     setPony: pony => {
-      dispatch(poneyReducer.setPony(pony))
+      dispatch(poneyReducer.setPony(pony));
     }
   };
 };
-
-
 
 export default withStyles(styles)(
   connect(

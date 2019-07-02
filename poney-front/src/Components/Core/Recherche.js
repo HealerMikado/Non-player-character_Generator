@@ -10,16 +10,16 @@ import Popper from "@material-ui/core/Popper";
 import Search from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
-import {setPonies} from "../../redux/Poney/poneyAction"
-import store from "../../redux/store"
+import { setPonies } from "../../redux/Poney/poneyAction";
+import store from "../../redux/store";
 
-const suggestions = () =>  {
-    fetch('localhost:8080/characters')
-      .then(response => response.json())
-      .then(result => {
-        store.dispatch(setPonies(result));
-      });
-}
+const suggestions = () => {
+  fetch("*/characters")
+    .then(response => response.json())
+    .then(result => {
+      store.dispatch(setPonies(result));
+    });
+};
 
 function renderInputComponent(inputProps) {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;
@@ -122,7 +122,7 @@ const useStyles = makeStyles(theme => ({
     height: 48,
     padding: "0 30px",
     float: "right",
-    bottom:"100px"
+    bottom: "100px"
   },
   input: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -172,37 +172,37 @@ export default function Recherche() {
   };
 
   return (
-      <Autosuggest
-        {...autosuggestProps}
-        inputProps={{
-          classes,
-          id: "react-autosuggest-popper",
-          name: "Country",
-          placeholder: "Recherchez votre poney",
-          value: state.popper,
-          onChange: handleChange("popper"),
-          inputRef: node => {
-            setAnchorEl(node);
-          },
-          InputLabelProps: {
-            shrink: true
-          }
-        }}
-        theme={{
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion
-        }}
-        renderSuggestionsContainer={options => (
-          <Popper anchorEl={anchorEl} open={Boolean(options.children)}>
-            <Paper
-              square
-              {...options.containerProps}
-              style={{ width: anchorEl ? anchorEl.clientWidth : undefined }}
-            >
-              {options.children}
-            </Paper>
-          </Popper>
-        )}
-      />
+    <Autosuggest
+      {...autosuggestProps}
+      inputProps={{
+        classes,
+        id: "react-autosuggest-popper",
+        name: "Country",
+        placeholder: "Recherchez votre poney",
+        value: state.popper,
+        onChange: handleChange("popper"),
+        inputRef: node => {
+          setAnchorEl(node);
+        },
+        InputLabelProps: {
+          shrink: true
+        }
+      }}
+      theme={{
+        suggestionsList: classes.suggestionsList,
+        suggestion: classes.suggestion
+      }}
+      renderSuggestionsContainer={options => (
+        <Popper anchorEl={anchorEl} open={Boolean(options.children)}>
+          <Paper
+            square
+            {...options.containerProps}
+            style={{ width: anchorEl ? anchorEl.clientWidth : undefined }}
+          >
+            {options.children}
+          </Paper>
+        </Popper>
+      )}
+    />
   );
 }

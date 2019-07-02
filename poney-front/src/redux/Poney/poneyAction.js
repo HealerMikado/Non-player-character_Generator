@@ -27,19 +27,19 @@ export const addPony = pony => {
   };
 };
 
-export  const fetchPonies =  (isChargement = false) =>  (dispatch, getState) => {
+export const fetchPonies = (isChargement = false) => (dispatch, getState) => {
   if (isChargement || getState().poneyReducer.ponies.length === 0) {
-    fetch(`${ getApiUrl()}/characters`)
+    fetch(`${getApiUrl()}/characters`)
       .then(response => response.json())
       .then(result => {
-        dispatch(setPonies(result))
-      })
+        dispatch(setPonies(result));
+      });
   }
 };
 
 export const fetchPonyById = name => {
-  return   dispatch =>  {
-    fetch(`${ getApiUrl()}/characters/${name}`)
+  return dispatch => {
+    fetch(`${getApiUrl()}/characters/${name}`)
       .then(response => response.json())
       .then(result => {
         dispatch(setPony(result));
@@ -47,26 +47,23 @@ export const fetchPonyById = name => {
   };
 };
 
-export const postPony = (pony) => {
+export const postPony = pony => {
   console.log(pony);
-  return  (dispatch) =>  {
-    fetch(
-      `${ getApiUrl()}/creation`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(pony)
-      }).then(
-        dispatch(addPony(pony))
-      );
+  return dispatch => {
+    fetch(`${getApiUrl()}/creation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(pony)
+    }).then(dispatch(addPony(pony)));
   };
 };
 
 export const fetchRandomPony = (isChargement = true) => {
-  return  (dispatch, getState) => {
+  return (dispatch, getState) => {
     if (isChargement || getState().poneyReducer.pony.mindLevel.length === 0) {
-      fetch(`${ getApiUrl()}/generate`)
+      fetch(`${getApiUrl()}/generate`)
         .then(response => response.json())
         .then(result => {
           dispatch(setPony(result));
