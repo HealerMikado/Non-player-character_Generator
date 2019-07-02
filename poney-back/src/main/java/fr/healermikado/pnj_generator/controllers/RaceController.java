@@ -24,13 +24,13 @@ public class RaceController {
     @Autowired
     public RaceService raceService;
 
-    @GetMapping(value = "races")
+    @GetMapping(value = "/races")
     @ResponseBody
     public List<Race> getAllRace() {
         return raceService.getAllRaces();
     }
 
-    @GetMapping(value = "race/{id}")
+    @GetMapping(value = "/race/{id}")
     @ResponseBody
     public Optional<Race> getRaceById(@PathVariable("id") Long id) {
         return raceService.getRaceById(id);

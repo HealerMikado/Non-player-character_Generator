@@ -48,13 +48,13 @@ public class CharacterGeneratorController {
 	}
 
 
-	@GetMapping(value = "character/{id}")
+	@GetMapping(value = "/character/{id}")
     @ResponseBody
     public CharacterDto findAlreadyMadeCharacterById(@PathVariable("id") Long id) {
         return characterService.getCharacterById(id);
     }
 
-    @GetMapping(value = "characters")
+    @GetMapping(value = "/characters")
     @ResponseBody
     public List<CharacterDto> findAllAlreadyMadeCharacter() {
         return characterService.getAllCharacter();
