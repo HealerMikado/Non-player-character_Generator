@@ -9,6 +9,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://front-pnj-generator.dev.innovation.insee.eu/");
+        registry.addMapping("/**").allowedOrigins("http://front-pnj-generator.dev.innovation.insee.eu");
     }
 }
