@@ -4,22 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.IQuirkDao;
 import fr.healermikado.pnj_generator.entity.QuirkEntity;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * DefaultService
  */
 @Service
-@Getter
-@Setter
 public class QuirkService {
 
     @Autowired
@@ -43,5 +37,15 @@ public class QuirkService {
         }
         return quirksToReturn;
     }
+    
+
+    public IQuirkDao getIQuirkDao() {
+        return this.iQuirkDao;
+    }
+
+    public void setIQuirkDao(IQuirkDao iQuirkDao) {
+        this.iQuirkDao = iQuirkDao;
+    }
+
 
 }

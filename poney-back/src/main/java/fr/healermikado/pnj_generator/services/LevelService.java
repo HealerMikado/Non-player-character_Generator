@@ -9,13 +9,11 @@ import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.ILevelDao;
 import fr.healermikado.pnj_generator.entity.Level;
-import lombok.Getter;
 
 /**
  * LevelService
  */
 @Service
-@Getter
 public class LevelService {
 
     @Autowired
@@ -32,4 +30,21 @@ public class LevelService {
         return (levelToTest < levels.size() - 1);
     }
 
+
+    public ILevelDao getILevelDao() {
+        return this.iLevelDao;
+    }
+
+    public void setILevelDao(ILevelDao iLevelDao) {
+        this.iLevelDao = iLevelDao;
+    }
+
+    public List<Level> getLevels() {
+        return this.levels;
+    }
+
+    public void setLevels(List<Level> levels) {
+        this.levels = levels;
+    }
+ 
 }
