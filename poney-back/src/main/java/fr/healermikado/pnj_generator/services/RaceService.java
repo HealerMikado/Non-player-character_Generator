@@ -8,15 +8,11 @@ import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.IRaceDao;
 import fr.healermikado.pnj_generator.entity.Race;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * RaceService
  */
 @Service
-@Getter
-@Setter
 public class RaceService {
 
     @Autowired
@@ -28,6 +24,16 @@ public class RaceService {
 
     public List<Race> getAllRaces(){
         return iRaceDao.findAll();
+    }
+
+
+
+    public IRaceDao getIRaceDao() {
+        return this.iRaceDao;
+    }
+
+    public void setIRaceDao(IRaceDao iRaceDao) {
+        this.iRaceDao = iRaceDao;
     }
     
 }

@@ -17,11 +17,6 @@ import lombok.ToString;
  * Character
  * 
  */
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class CharacterDto {
 
     // The name of the pony
@@ -50,6 +45,9 @@ public class CharacterDto {
 
     //The default list
     private Set<String> quirks;
+    
+    public CharacterDto() {
+    }
 
     public CharacterDto(String name, Race race, int level) {
         this.name = name;
@@ -64,7 +62,6 @@ public class CharacterDto {
         this.src = src;
     }
 
-
     public CharacterDto(CharacterEntity alreadyMadeEntity) {
 
         this.name = alreadyMadeEntity.getName();
@@ -77,5 +74,93 @@ public class CharacterDto {
         this.charmLevel = alreadyMadeEntity.getCharmLevel();
         
     }
-    
+
+
+    public CharacterDto(String name, String race, int level, Map<String, Level> talents, Level bodyLevel,
+            Level mindLevel, Level charmLevel, String src, Set<String> quirks) {
+        this.name = name;
+        this.race = race;
+        this.level = level;
+        this.talents = talents;
+        this.bodyLevel = bodyLevel;
+        this.mindLevel = mindLevel;
+        this.charmLevel = charmLevel;
+        this.src = src;
+        this.quirks = quirks;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public Map<String, Level> getTalents() {
+        return talents;
+    }
+
+    public void setTalents(Map<String, Level> talents) {
+        this.talents = talents;
+    }
+
+    public Level getBodyLevel() {
+        return bodyLevel;
+    }
+
+    public void setBodyLevel(Level bodyLevel) {
+        this.bodyLevel = bodyLevel;
+    }
+
+    public Level getMindLevel() {
+        return mindLevel;
+    }
+
+    public void setMindLevel(Level mindLevel) {
+        this.mindLevel = mindLevel;
+    }
+
+    public Level getCharmLevel() {
+        return charmLevel;
+    }
+
+    public void setCharmLevel(Level charmLevel) {
+        this.charmLevel = charmLevel;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public Set<String> getQuirks() {
+        return quirks;
+    }
+
+    public void setQuirks(Set<String> quirks) {
+        this.quirks = quirks;
+    }
+
+
 }

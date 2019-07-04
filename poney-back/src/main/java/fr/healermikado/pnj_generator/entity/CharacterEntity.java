@@ -27,10 +27,6 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "already_made")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class CharacterEntity {
 
     private static final String ID_QUIRK = "id_quirk";
@@ -67,5 +63,83 @@ public class CharacterEntity {
     @ManyToOne()
     @JoinColumn(name="lvl_charm", referencedColumnName = "lvl")    
     private Level charmLevel;
+
+    public static String getIdQuirk() {
+        return ID_QUIRK;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public Set<QuirkEntity> getQuirks() {
+        return quirks;
+    }
+
+    public void setQuirks(Set<QuirkEntity> quirks) {
+        this.quirks = quirks;
+    }
+
+    public Level getBodyLevel() {
+        return bodyLevel;
+    }
+
+    public void setBodyLevel(Level bodyLevel) {
+        this.bodyLevel = bodyLevel;
+    }
+
+    public Level getMindLevel() {
+        return mindLevel;
+    }
+
+    public void setMindLevel(Level mindLevel) {
+        this.mindLevel = mindLevel;
+    }
+
+    public Level getCharmLevel() {
+        return charmLevel;
+    }
+
+    public void setCharmLevel(Level charmLevel) {
+        this.charmLevel = charmLevel;
+    }
+
+    
     
 }
