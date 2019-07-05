@@ -7,16 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Talent
  */
 @Entity
 @Table(name="talents")
-@Getter
-@Setter
+
 public class Talent {
 
     @Id
@@ -26,5 +22,22 @@ public class Talent {
    
     @Column
     private String nom;
+
+    public Long getIdTalent() {
+        return idTalent;
+    }
+
+    public void setIdTalent(Long idTalent) {
+        this.idTalent = idTalent;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     
 }

@@ -14,15 +14,11 @@ import org.springframework.stereotype.Service;
 import fr.healermikado.pnj_generator.daos.ITalentDao;
 import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.entity.Talent;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * TalentService
  */
 @Service
-@Getter
-@Setter
 public class TalentService {
     @Autowired
     private LevelService levelService;
@@ -73,4 +69,22 @@ public class TalentService {
         return talentsOut;
 
     }
+
+    public LevelService getLevelService() {
+        return levelService;
+    }
+
+    public void setLevelService(LevelService levelService) {
+        this.levelService = levelService;
+    }
+
+    public ITalentDao getiTalentDao() {
+        return iTalentDao;
+    }
+
+    public void setiTalentDao(ITalentDao iTalentDao) {
+        this.iTalentDao = iTalentDao;
+    }
+
+    
 }

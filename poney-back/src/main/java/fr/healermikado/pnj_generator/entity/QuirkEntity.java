@@ -5,16 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
-/**
+/*
  * QuirkEntity
  */
 @Entity
 @Table(name = "quirks")
-@Getter
-@Setter
+
 public class QuirkEntity {
 
     @Id
@@ -23,5 +19,23 @@ public class QuirkEntity {
 
     @Column(name="name_quirk")
     private String value;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
+
     
 }

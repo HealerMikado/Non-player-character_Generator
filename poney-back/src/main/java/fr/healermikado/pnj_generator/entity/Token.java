@@ -7,20 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 /**
  * Name
  */
 @Entity
 @Table(name="tokens")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 public class Token {
 
     @Id
@@ -30,4 +24,23 @@ public class Token {
 
     @Column(name = "token")
     private String token;
+
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    
 }

@@ -5,20 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 /**
  * Level
  */
 @Entity
 @Table(name = "level")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Level {
 
     @Id
@@ -26,5 +19,36 @@ public class Level {
     private Long lvl;
 
     @Column(name="lvl_value")
-    private String diceValue;    
+    private String diceValue;
+
+    /**
+     * Full arg constructor
+     * @param lvl
+     * @param diceValue
+     */
+    public Level(Long lvl, String diceValue) {
+        this.lvl = lvl;
+        this.diceValue = diceValue;
+    }
+
+    public Level(){
+        
+    }
+ 
+	public Long getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(Long lvl) {
+        this.lvl = lvl;
+    }
+
+    public String getDiceValue() {
+        return diceValue;
+    }
+
+    public void setDiceValue(String diceValue) {
+        this.diceValue = diceValue;
+    }
+    
 }
