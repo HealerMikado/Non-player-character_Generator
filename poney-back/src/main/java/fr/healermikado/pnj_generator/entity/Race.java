@@ -18,20 +18,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * Race
  */
 @Entity
 @Table(name = "races")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Race {
 
     @Id
@@ -67,4 +59,53 @@ public class Race {
         allTalents.addAll(genericTalents);
         return allTalents;
     }
+
+        public Long getIdRace() {
+                return idRace;
+        }
+
+        public void setIdRace(Long idRace) {
+                this.idRace = idRace;
+        }
+
+        public String getName() {
+                return name;
+        }
+
+        public void setName(String name) {
+                this.name = name;
+        }
+
+        public List<RaceImage> getImages() {
+                return images;
+        }
+
+        public void setImages(List<RaceImage> images) {
+                this.images = images;
+        }
+
+        public Set<Talent> getSpecificTalents() {
+                return specificTalents;
+        }
+
+        public void setSpecificTalents(Set<Talent> specificTalents) {
+                this.specificTalents = specificTalents;
+        }
+
+        public Set<Token> getPossibleToken() {
+                return possibleToken;
+        }
+
+        public void setPossibleToken(Set<Token> possibleToken) {
+                this.possibleToken = possibleToken;
+        }
+
+        public Set<Talent> getGenericTalents() {
+                return genericTalents;
+        }
+
+        public void setGenericTalents(Set<Talent> genericTalents) {
+                this.genericTalents = genericTalents;
+        }
+
 }

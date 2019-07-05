@@ -57,7 +57,9 @@
         }
       ],
       "portDefinitions": [],
-      "maxLaunchDelaySeconds": 300
+      "backoffFactor": 5,
+      "backoffSeconds": 10,
+      "maxLaunchDelaySeconds": 7200
     },
     {
       "id": "front",
@@ -104,7 +106,10 @@
           "IS",
           "boss"
         ]
-      ]
+      ],
+      "backoffFactor": 5,
+      "backoffSeconds": 10,
+      "maxLaunchDelaySeconds": 7200
     }
   ]
 }

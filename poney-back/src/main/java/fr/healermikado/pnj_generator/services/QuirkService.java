@@ -11,15 +11,11 @@ import org.springframework.stereotype.Service;
 
 import fr.healermikado.pnj_generator.daos.IQuirkDao;
 import fr.healermikado.pnj_generator.entity.QuirkEntity;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * DefaultService
  */
 @Service
-@Getter
-@Setter
 public class QuirkService {
 
     @Autowired
@@ -43,5 +39,15 @@ public class QuirkService {
         }
         return quirksToReturn;
     }
+
+    public IQuirkDao getiQuirkDao() {
+        return iQuirkDao;
+    }
+
+    public void setiQuirkDao(IQuirkDao iQuirkDao) {
+        this.iQuirkDao = iQuirkDao;
+    }
+
+    
 
 }
